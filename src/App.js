@@ -1,10 +1,9 @@
-import Home from './views/home.js'
-import './App.css';
+import SignIn from './views/sign-in.js';
 
 function App() {
   return (
     <div className="App">
-      <Home/>
+      <SignIn/>
     </div>
   );
 }
