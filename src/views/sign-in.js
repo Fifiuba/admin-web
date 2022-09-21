@@ -35,12 +35,12 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
             FIFIUBA
           </Typography>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -54,7 +54,7 @@ export default function SignIn() {
             />
             <Grid item xs>
               <Link href="#" variant="body2">
-              ¿Has olvidado la contraseña?
+              ¿Olvidaste la contraseña?
               </Link>
             </Grid>
             <TextField
@@ -75,11 +75,6 @@ export default function SignIn() {
             >
               Iniciar sesión
             </Button>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-              ¿No tenes cuenta? Registrate
-              </Link>
-            </Grid>
           </Box>
         </Box>
       </Container>
