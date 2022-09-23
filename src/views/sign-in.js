@@ -9,18 +9,23 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {Navigate} from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({handleLogin, user}) {
+  if (user) return <Navigate to="/inicio"/>;
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
+    // console.log("handlelogin",handleLogin)
+    handleLogin();
+    // const data = new FormData(event.currentTarget);
+    /* console.log({
       email: data.get('email'),
       password: data.get('password'),
-    });
+    });*/
   };
 
   return (
@@ -38,10 +43,10 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             FIFIUBA
           </Typography>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
             <LockOutlinedIcon />
           </Avatar>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
             <TextField
               margin="normal"
               required
@@ -71,9 +76,9 @@ export default function SignIn() {
               fullWidth
               type="submit"
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{mt: 3, mb: 2}}
             >
-              Iniciar sesión
+            Iniciar Sesión
             </Button>
           </Box>
         </Box>
