@@ -1,34 +1,35 @@
-/*import React, {useState} from 'react';
-import getusers from '../services/get-users'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-function Home() {
-    const [users, setUsers] = useState(null);
-    return (
-        <div>
-            <h1>Admin</h1>
-            <button onClick={()=> setUsers(getusers())}>Get users</button>
-            <ul>{users && users.map((user, idx) => <li key={idx}>Nombre:{user.name} </li>)}</ul>
-        </div>
-  )*/
-  /*import React from 'react';
+export default function Home({user}) {
+  return (
+    <div>
+      <h1>Admin: {user.name}</h1>
+      <Link to="/perfil">  Perfil  </Link>
+      <Link to="/registrar">  Registrar administrador  </Link>
+    </div>
+  );
+}
+/* import React from 'react';
   import Button from '@material-ui/core/Button';
   import Menu from '@material-ui/core/Menu';
   import MenuItem from '@material-ui/core/MenuItem';
-  
+
   export default function SimpleMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
-  
+
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
-  
+
     const handleClose = () => {
       setAnchorEl(null);
     };
-  
+
     return (
       <div>
-        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        <Button aria-controls="simple-menu"
+        aria-haspopup="true" onClick={handleClick}>
           Open Menu
         </Button>
         <Menu
