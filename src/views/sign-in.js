@@ -1,31 +1,32 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import ValidationField from '../components/validation-field';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {blue} from '@mui/material/colors';
+import validate from '../utils/validation';
 import {Navigate} from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function SignIn({handleLogin, user}) {
-  if (user) return <Navigate to="/inicio"/>;
-
+export default function SignIn({handleLogin, admin}) {
+  if (admin) return <Navigate to="/inicio"/>;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showError, setShowError] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("handlelogin",handleLogin)
-    handleLogin();
-    // const data = new FormData(event.currentTarget);
-    /* console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });*/
+    if (validate('admin', 'Correo electrónico', email) &&
+        validate('admin', 'Contraseña', password)) {
+      handleLogin();
+    } else {
+      setShowError(true);
+    }
   };
 
   return (
@@ -43,42 +44,36 @@ export default function SignIn({handleLogin, user}) {
           <Typography component="h1" variant="h5">
             FIFIUBA
           </Typography>
-          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-            <LockOutlinedIcon />
+          <Avatar sx={{m: 1, bgcolor: blue[100]}}>
+            <LockOutlinedIcon color="primary"/>
           </Avatar>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
+          <Box
+            component="form"
+            fullWidth
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{mt: 1, width: '100%'}}>
+            <ValidationField
+              enabled={true}
+              value={email}
               label="Correo electrónico"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <Grid item xs>
-              <Link href="#" variant="body2">
-              ¿Olvidaste la contraseña?
-              </Link>
-            </Grid>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
+              onChange={setEmail}
+              valid={
+                !showError || validate('admin', 'Correo electrónico', email)}/>
+            <ValidationField
+              enabled={true}
+              value={password}
               label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+              onChange={setPassword}
+              valid={
+                !showError || validate('admin', 'Contraseña', password)}/>
             <Button
               fullWidth
-              type="submit"
               variant="contained"
-              sx={{mt: 3, mb: 2}}
+              sx={{mb: 2}}
+              onClick={handleSubmit}
             >
-            Iniciar Sesión
+            Iniciar sesión
             </Button>
           </Box>
         </Box>
