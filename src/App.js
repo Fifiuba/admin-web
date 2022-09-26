@@ -11,9 +11,10 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleLogin = () => {
-    console.log('login');
-    setUser({name: 'Franco'});
-    console.log('user: ', user);
+    setUser({name: 'Franco',
+      last_name: 'Gomez',
+      email: 'francodgmz@gmail.com',
+      password: '1234'});
   };
 
   const handleLogout = () => {
@@ -33,7 +34,7 @@ function App() {
         <Route path="registrar" element={<SignUp/>} />
         <Route element={<ProtectedRoute user={user}/>}>
           <Route path="inicio" element={<Home user={user}/>} />
-          <Route path="perfil" element={<Profile/>} />
+          <Route path="perfil" element={<Profile user={user}/>} />
         </Route>
       </Routes>
     </BrowserRouter>
