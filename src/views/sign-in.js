@@ -57,6 +57,7 @@ export default function SignIn({handleLogin, admin}) {
               enabled={true}
               value={email}
               label="Correo electrónico"
+              type="email"
               onChange={setEmail}
               valid={
                 !showError || validate('admin', 'Correo electrónico', email)}/>
@@ -64,6 +65,7 @@ export default function SignIn({handleLogin, admin}) {
               enabled={true}
               value={password}
               label="Contraseña"
+              type="password"
               onChange={setPassword}
               valid={
                 !showError || validate('admin', 'Contraseña', password)}/>

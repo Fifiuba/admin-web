@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 export default function ValidationField({
-  label, value, enabled, onChange, valid}) {
+  label, value, enabled, onChange, valid, type}) {
   const handleChange = (event) => {
     onChange(event.target.value);
   };
@@ -18,6 +18,7 @@ export default function ValidationField({
     >
       <div>
         <TextField
+          type={type}
           disabled={!enabled}
           error={!valid}
           fullWidth
