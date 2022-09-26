@@ -34,7 +34,7 @@ function App() {
           element={<SignIn handleLogin={handleLogin}
             admin={admin}/>}
         />
-        <Route path="registrar" element={<SignUp/>} />
+        <Route path="registrar" element={<SignUp admin={admin}/>} />
         <Route element={<ProtectedRoute admin={admin}/>}>
           <Route path="inicio" element={<Home admin={admin}/>} />
           <Route path="perfil" element={<Profile admin={admin}/>} />
