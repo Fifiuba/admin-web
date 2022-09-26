@@ -52,7 +52,10 @@ export default function SignIn({handleLogin, admin}) {
             fullWidth
             onSubmit={handleSubmit}
             noValidate
-            sx={{mt: 1, width: '100%'}}>
+            sx={{
+              mt: 1,
+              width: '100%',
+            }}>
             <ValidationField
               enabled={true}
               value={email}
@@ -72,7 +75,10 @@ export default function SignIn({handleLogin, admin}) {
             <Button
               fullWidth
               variant="contained"
-              sx={{mb: 2}}
+              sx={{
+                mb: 2,
+                ml: 1,
+              }}
               onClick={handleSubmit}
             >
             Iniciar sesión
