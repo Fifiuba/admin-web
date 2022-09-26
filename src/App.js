@@ -8,33 +8,36 @@ import Navbar from './components/navbar.js';
 import {ProtectedRoute} from './components/protected-route.js';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
 
   const handleLogin = () => {
-    setUser({name: 'Franco',
+    // hacer request y setear datos del admin
+    setAdmin({name: 'Franco',
       last_name: 'Gomez',
       email: 'francodgmz@gmail.com',
       password: '1234'});
   };
 
   const handleLogout = () => {
-    setUser(null);
+    setAdmin(null);
   };
 
   return (
 
     <BrowserRouter>
-      <Navbar user={user} handleLogout={handleLogout}/>
+      <Navbar admin={admin} handleLogout={handleLogout}/>
       <Routes>
-        <Route index element={<SignIn handleLogin={handleLogin} user={user}/>}/>
+        <Route
+          index
+          element={<SignIn handleLogin={handleLogin} admin={admin}/>}/>
         <Route path="ingresar"
           element={<SignIn handleLogin={handleLogin}
-            user={user}/>}
+            admin={admin}/>}
         />
         <Route path="registrar" element={<SignUp/>} />
-        <Route element={<ProtectedRoute user={user}/>}>
-          <Route path="inicio" element={<Home user={user}/>} />
-          <Route path="perfil" element={<Profile user={user}/>} />
+        <Route element={<ProtectedRoute admin={admin}/>}>
+          <Route path="inicio" element={<Home admin={admin}/>} />
+          <Route path="perfil" element={<Profile admin={admin}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

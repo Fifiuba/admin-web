@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default function Home({user}) {
+export default function Home({admin}) {
   return (
     <div>
-      <h1>Admin: {user.name}</h1>
+      <h1>Admin: {admin.name}</h1>
       <Link to="/perfil">  Perfil  </Link>
       <Link to="/registrar">  Registrar administrador  </Link>
     </div>

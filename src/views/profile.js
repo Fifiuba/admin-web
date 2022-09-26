@@ -14,21 +14,21 @@ import validate from '../utils/validation';
 
 const theme = createTheme();
 
-export default function Profile({user}) {
-  if (!user) return <Navigate to="/ingresar"/>;
+export default function Profile({admin}) {
+  if (!admin) return <Navigate to="/ingresar"/>;
 
   const [edit, setEdit] = useState(false);
-  const [name, setName] = useState(user.name);
-  const [lastname, setLastname] = useState(user.last_name);
-  const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState(user.password);
+  const [name, setName] = useState(admin.name);
+  const [lastname, setLastname] = useState(admin.last_name);
+  const [email, setEmail] = useState(admin.email);
+  const [password, setPassword] = useState(admin.password);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validate('user', 'Nombre', name) &&
-        validate('user', 'Apellido', lastname) &&
-        validate('user', 'Correo electrónico', email) &&
-        validate('user', 'Contraseña', password)) {
+    if (validate('admin', 'Nombre', name) &&
+        validate('admin', 'Apellido', lastname) &&
+        validate('admin', 'Correo electrónico', email) &&
+        validate('admin', 'Contraseña', password)) {
       alert('Guardar datos');
     } else {
       alert('Mostrar error');
@@ -41,10 +41,10 @@ export default function Profile({user}) {
 
   const handleCancel = () => {
     setEdit(!edit);
-    setName(user.name);
-    setLastname(user.last_name);
-    setEmail(user.email);
-    setPassword(user.password);
+    setName(admin.name);
+    setLastname(admin.last_name);
+    setEmail(admin.email);
+    setPassword(admin.password);
   };
 
   return (
@@ -76,25 +76,25 @@ export default function Profile({user}) {
               value={name}
               label="Nombre"
               onChange={setName}
-              valid={validate('user', 'Nombre', name)}/>
+              valid={validate('admin', 'Nombre', name)}/>
             <ValidationField
               enabled={edit}
               value={lastname}
               label="Apellido"
               onChange={setLastname}
-              valid={validate('user', 'Apellido', lastname)}/>
+              valid={validate('admin', 'Apellido', lastname)}/>
             <ValidationField
               enabled={edit}
               value={email}
               label="Correo electrónico"
               onChange={setEmail}
-              valid={validate('user', 'Correo electrónico', email)}/>
+              valid={validate('admin', 'Correo electrónico', email)}/>
             <ValidationField
               enabled={edit}
               value={password}
               label="Contraseña"
               onChange={setPassword}
-              valid={validate('user', 'Contraseña', password)}/>
+              valid={validate('admin', 'Contraseña', password)}/>
             { !edit &&
             <Button
               fullWidth

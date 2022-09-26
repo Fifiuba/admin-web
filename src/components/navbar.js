@@ -5,13 +5,13 @@ import Container from '@mui/material/Container';
 import NavLogo from './nav-logo';
 import NavMenu from './nav-menu';
 
-const Navbar = ({user, handleLogout}) => {
+const Navbar = ({admin, handleLogout}) => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavLogo/>
-          {user && <NavMenu handleLogout={handleLogout}/>}
+          {admin && <NavMenu handleLogout={handleLogout}/>}
         </Toolbar>
       </Container>
     </AppBar>

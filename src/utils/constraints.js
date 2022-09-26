@@ -1,6 +1,6 @@
 const Constraints = {
 
-  'user': {
+  'admin': {
     'Nombre': {
       'max': 20,
       'min': 3,
