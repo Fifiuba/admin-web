@@ -6,16 +6,16 @@ import Home from './views/home.js';
 import Profile from './views/profile.js';
 import Navbar from './components/navbar.js';
 import {ProtectedRoute} from './components/protected-route.js';
+import signin from './services/sign-in.js';
+
 
 function App() {
   const [admin, setAdmin] = useState(null);
 
-  const handleLogin = () => {
+  const handleLogin = async (admin) => {
     // hacer request y setear datos del admin
-    setAdmin({name: 'Franco',
-      last_name: 'Gomez',
-      email: 'francodgmz@gmail.com',
-      password: '1234'});
+    const adminResponse = await signin(admin);
+    setAdmin(adminResponse);
   };
 
   const handleLogout = () => {
