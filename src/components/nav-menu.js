@@ -11,21 +11,21 @@ import Tooltip from '@mui/material/Tooltip';
 
 export default function NavMenu({handleLogout}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElAdmin, setAnchorElAdmin] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleOpenAdminMenu = (event) => {
+    setAnchorElAdmin(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleCloseAdminMenu = () => {
+    setAnchorElAdmin(null);
   };
 
   return (
@@ -60,7 +60,9 @@ export default function NavMenu({handleLogout}) {
         >
           <MenuItem onClick={handleCloseNavMenu}>
             <Button component={RouterLink} to="/inicio">Inicio</Button>
-            <Button component={RouterLink} to="/inicio">Opción#1</Button>
+            <Button component={RouterLink} to="/registrar">
+              Registrar administrador
+            </Button>
             <Button component={RouterLink} to="/inicio">Opción#2</Button>
           </MenuItem>
         </Menu>
@@ -74,10 +76,10 @@ export default function NavMenu({handleLogout}) {
                 Inicio
         </Button>
         <Button component={RouterLink}
-          to="/inicio"
+          to="/registrar"
           sx={{my: 2, color: 'white', display: 'block'}}
         >
-                Opción#1
+                + Admin
         </Button>
         <Button component={RouterLink}
           to="/inicio"
@@ -90,7 +92,7 @@ export default function NavMenu({handleLogout}) {
       <Box sx={{display: 'flex', flexGrow: 1, alignItems: 'center'}}>
 
         <Tooltip title="Configuración">
-          <IconButton onClick={handleOpenUserMenu}
+          <IconButton onClick={handleOpenAdminMenu}
             sx={{position: 'fixed', right: 0}}
           >
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -99,14 +101,14 @@ export default function NavMenu({handleLogout}) {
         <Menu
           sx={{mt: '45px'}}
           id="menu-appbar"
-          anchorEl={anchorElUser}
+          anchorEl={anchorElAdmin}
           anchorOrigin={{vertical: 'top', horizontal: 'right'}}
           keepMounted
           transformOrigin={{vertical: 'top', horizontal: 'right'}}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
+          open={Boolean(anchorElAdmin)}
+          onClose={handleCloseAdminMenu}
         >
-          <MenuItem onClick={handleCloseUserMenu}>
+          <MenuItem onClick={handleCloseAdminMenu}>
             <Button component={RouterLink} to="/perfil">Perfil</Button>
           </MenuItem>
           <MenuItem onClick={handleLogout}>

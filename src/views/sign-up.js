@@ -1,25 +1,36 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {Navigate} from 'react-router-dom';
+import ValidationField from '../components/validation-field';
+import validate from '../utils/validation';
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({admin}) {
+  if (!admin) return <Navigate to="/ingresar"/>;
+
+  const [showError, setShowError] = useState(false);
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if (validate('admin', 'Nombre', name) &&
+        validate('admin', 'Apellido', lastname) &&
+        validate('admin', 'Correo electrónico', email) &&
+        validate('admin', 'Contraseña', password)) {
+      alert('Guardar datos');
+    } else {
+      setShowError(true);
+      alert('Mostrar error');
+    }
   };
 
   return (
@@ -35,63 +46,46 @@ export default function SignUp() {
           }}
         >
           <Typography component="h1" variant="h5">
-            FIFIUBA
+            REGISTRO
           </Typography>
-          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="Nombre"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Apellido"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Correo electrónico"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-            </Grid>
+          <Box
+            component="form"
+            fullWidth
+            noValidate
+            sx={{mt: 1, width: '100%'}}>
+            <ValidationField
+              enabled={true}
+              value={name}
+              label="Nombre"
+              onChange={setName}
+              valid={!showError || validate('admin', 'Nombre', name)}/>
+            <ValidationField
+              enabled={true}
+              value={lastname}
+              label="Apellido"
+              onChange={setLastname}
+              valid={
+                !showError || validate('admin', 'Apellido', lastname)}/>
+            <ValidationField
+              enabled={true}
+              value={email}
+              label="Correo electrónico"
+              onChange={setEmail}
+              valid={
+                !showError || validate('admin', 'Correo electrónico', email)}/>
+            <ValidationField
+              enabled={true}
+              value={password}
+              label="Contraseña"
+              onChange={setPassword}
+              valid={!showError || validate('admin', 'Contraseña', password)}/>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
-              sx={{mt: 3, mb: 2}}
+              sx={{mb: 2}}
+              onClick={handleSubmit}
             >
-              Registrar usuario
+            Registrar
             </Button>
           </Box>
         </Box>
