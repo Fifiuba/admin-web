@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export default async function signin(admin) {
+export default function signin(admin,setAdmin) {
   signInWithEmailAndPassword(auth, admin.email, admin.password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -26,17 +26,22 @@ export default async function signin(admin) {
               const body = {
                 token: tokenId,
               };
+              console.log(tokenId);
               axios.post('http://localhost:8000/admins/login', body)
                 .then((res) => {
-                  console.log(res.data);
                   localStorage.setItem("token", res.data['token']);
+                  const admin = {
+                    "name":"Alejo",
+                    "last_name": "Villores",
+                  }
+                  setAdmin(admin)
                 })
                 .catch((err) => {
                   console.error(err);
                   return null
                 });
             });
-        return user;
+        //return user;
 
       })
       .catch(() => {

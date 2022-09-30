@@ -18,6 +18,7 @@ export default function SignIn({handleLogin, admin}) {
   if (admin) return <Navigate to="/inicio"/>;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('Entrada Inválida!')
   const [showError, setShowError] = useState(false);
 
   const handleSubmit = (event) => {
@@ -30,6 +31,7 @@ export default function SignIn({handleLogin, admin}) {
       });
     } else {
       setShowError(true);
+      setError('Error');
     }
   };
 
@@ -65,6 +67,7 @@ export default function SignIn({handleLogin, admin}) {
               value={email}
               label="Correo electrónico"
               type="email"
+              errMsg = {error}
               onChange={setEmail}
               valid={
                 !showError || validate('admin', 'Correo electrónico', email)}/>
@@ -74,6 +77,7 @@ export default function SignIn({handleLogin, admin}) {
               label="Contraseña"
               type="password"
               onChange={setPassword}
+              errMsg = {error}
               valid={
                 !showError || validate('admin', 'Contraseña', password)}/>
             <Button

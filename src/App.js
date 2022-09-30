@@ -14,8 +14,7 @@ function App() {
 
   const handleLogin = async (admin) => {
     // hacer request y setear datos del admin
-    const adminResponse = await signin(admin);
-    setAdmin(adminResponse);
+    signin(admin,setAdmin);
   };
 
   const handleLogout = () => {
