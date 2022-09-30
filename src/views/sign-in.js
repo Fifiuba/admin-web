@@ -19,11 +19,15 @@ export default function SignIn({handleLogin, admin}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validate('admin', 'Correo electrónico', email) &&
         validate('admin', 'Contraseña', password)) {
-      handleLogin();
+      handleLogin({
+        'email': email,
+        'password': password,
+      });
     } else {
       setShowError(true);
     }
