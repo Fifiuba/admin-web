@@ -11,6 +11,8 @@ import ValidationField from '../components/validation-field';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {blue} from '@mui/material/colors';
 import validate from '../utils/validation';
+import editProfile from '../services/edit-profile';
+import {Alert} from '@mui/material';
 
 const theme = createTheme();
 
@@ -21,15 +23,24 @@ export default function Profile({admin}) {
   const [name, setName] = useState(admin.name);
   const [lastname, setLastname] = useState(admin.last_name);
   const [email, setEmail] = useState(admin.email);
-  const [password, setPassword] = useState(admin.password);
+  const [editError, setEditError] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validate('admin', 'Nombre', name) &&
         validate('admin', 'Apellido', lastname) &&
-        validate('admin', 'Correo electrónico', email) &&
-        validate('admin', 'Contraseña', password)) {
-      alert('Guardar datos');
+        validate('admin', 'Correo electrónico', email)) {
+      const success = await editProfile({
+        'name': name,
+        'last_name': lastname,
+        'email': admin.email,
+      });
+      if (!success) {
+        setEditError(true);
+        setTimeout(() => {
+          setEditError(false);
+        }, 5000);
+      }
     } else {
       alert('Mostrar error');
     }
@@ -84,17 +95,16 @@ export default function Profile({admin}) {
               onChange={setLastname}
               valid={validate('admin', 'Apellido', lastname)}/>
             <ValidationField
-              enabled={edit}
+              enabled={false}
               value={email}
               label="Correo electrónico"
               onChange={setEmail}
               valid={validate('admin', 'Correo electrónico', email)}/>
-            <ValidationField
-              enabled={edit}
-              value={password}
-              label="Contraseña"
-              onChange={setPassword}
-              valid={validate('admin', 'Contraseña', password)}/>
+            {editError &&
+              <Alert severity="error">
+                Ocurrio un error. Intente nuevamente
+              </Alert>
+            }
             { !edit &&
             <Button
               fullWidth
