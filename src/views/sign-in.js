@@ -11,7 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {blue} from '@mui/material/colors';
 import validate from '../utils/validation';
 import {Navigate} from 'react-router-dom';
-import {Alert} from '@mui/material';
+import {Alert, FormControlLabel, FormGroup} from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 
 const theme = createTheme();
 
@@ -21,6 +22,7 @@ export default function SignIn({handleLogin, admin, signUpError}) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('Entrada Inválida!');
   const [showError, setShowError] = useState(false);
+  const [stayLogged, setStayLogged] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,7 +31,7 @@ export default function SignIn({handleLogin, admin, signUpError}) {
       handleLogin({
         'email': email,
         'password': password,
-      });
+      }, stayLogged);
     } else {
       setShowError(true);
       setError('Error');
@@ -80,6 +82,18 @@ export default function SignIn({handleLogin, admin, signUpError}) {
               errMsg = {error}
               valid={
                 !showError || validate('admin', 'Contraseña', password)}/>
+            <FormGroup>
+              <FormControlLabel
+                sx={{ml: 0.05}}
+                control={
+                  <Checkbox
+                    checked={stayLogged}
+                    onChange={(e) => setStayLogged(e.target.checked)}
+                  />
+                }
+                label="No cerrar sesión"
+              />
+            </FormGroup>
             <Button
               fullWidth
               variant="contained"

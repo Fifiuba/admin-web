@@ -13,8 +13,8 @@ function App() {
   const [admin, setAdmin] = useState(null);
   const [signUpError, setSignUpError] = useState(false);
 
-  const handleLogin = async (admin) => {
-    const loggedAdmin = await signin(admin);
+  const handleLogin = async (admin, stayLogged) => {
+    const loggedAdmin = await signin(admin, stayLogged);
     // signup error
     if (!loggedAdmin) {
       setSignUpError(true);

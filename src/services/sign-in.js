@@ -28,12 +28,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export default async function signin(admin) {
+export default async function signin(admin, stayLogged) {
   try {
     const token = await authFirebase(admin);
     const res = await authAdmin(token);
-    localStorage.setItem('token', res.data['token']);
-    return {name: 'Franco', last_name: 'Gomez'};
+    if (stayLogged) localStorage.setItem('token', res.data['token']);
+    return {name: res.data.name, last_name: res.data.last_name};
   } catch (e) {
     return;
   }
