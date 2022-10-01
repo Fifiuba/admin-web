@@ -3,8 +3,8 @@ import axios from 'axios';
 export default async function editProfile(admin) {
   try {
     const res = await editAdmin(admin);
-    console.log('respuesta:', res);
-    return true;
+    if (res.status == 200 || res.status == 202) return true;
+    return false;
   } catch (e) {
     return false;
   }

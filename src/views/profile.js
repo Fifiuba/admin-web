@@ -24,6 +24,7 @@ export default function Profile({admin}) {
   const [lastname, setLastname] = useState(admin.last_name);
   const [email, setEmail] = useState(admin.email);
   const [editError, setEditError] = useState(false);
+  const [editSuccess, setEditSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,10 +40,20 @@ export default function Profile({admin}) {
         setEditError(true);
         setTimeout(() => {
           setEditError(false);
-        }, 5000);
+        }, 3000);
+      } else {
+        setEditSuccess(true);
+        setEdit(false);
+        setTimeout(() => {
+          setEditSuccess(false);
+        }, 3000);
       }
     } else {
-      alert('Mostrar error');
+      setEditSuccess(true);
+      setEdit(false);
+      setTimeout(() => {
+        setEditSuccess(false);
+      }, 3000);
     }
   };
 
@@ -103,6 +114,11 @@ export default function Profile({admin}) {
             {editError &&
               <Alert severity="error">
                 Ocurrio un error. Intente nuevamente
+              </Alert>
+            }
+            {editSuccess &&
+              <Alert severity="success">
+                Se realizaron los cambios correctamente
               </Alert>
             }
             { !edit &&
