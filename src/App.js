@@ -26,7 +26,8 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = (admin) => {
+    if (!admin['stayLogged']) localStorage.removeItem('token');
     setAdmin(null);
   };
 

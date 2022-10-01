@@ -12,15 +12,17 @@ export default async function editProfile(admin) {
 
 function editAdmin(admin) {
   const token = localStorage.getItem('token');
-  if (!token) token = sessionStorage.getItem('token');
   if (!token) {
     alert('NO TOKEN');
     return;
   }
+  const config = {
+    headers: {Authorization: `Bearer ${token}`},
+  };
+
   return axios
       .patch('http://localhost:8000/admins/me/',
           {'name': admin.name,
-            'last_name': admin.last_name,
-            'email': admin.email,
-            'token': token});
+            'last_name': admin.last_name}
+          , config);
 }

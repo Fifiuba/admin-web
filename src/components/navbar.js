@@ -11,7 +11,7 @@ const Navbar = ({admin, handleLogout}) => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavLogo/>
-          {admin && <NavMenu handleLogout={handleLogout}/>}
+          {admin && <NavMenu handleLogout={() => handleLogout(admin)}/>}
         </Toolbar>
       </Container>
     </AppBar>
