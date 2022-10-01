@@ -11,15 +11,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {blue} from '@mui/material/colors';
 import validate from '../utils/validation';
 import {Navigate} from 'react-router-dom';
+import {Alert, FormControlLabel, FormGroup} from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 
 const theme = createTheme();
 
-export default function SignIn({handleLogin, admin}) {
+export default function SignIn({handleLogin, admin, signUpError}) {
   if (admin) return <Navigate to="/inicio"/>;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('Entrada Inválida!')
+  const [error, setError] = useState('Entrada Inválida!');
   const [showError, setShowError] = useState(false);
+  const [stayLogged, setStayLogged] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,7 +31,7 @@ export default function SignIn({handleLogin, admin}) {
       handleLogin({
         'email': email,
         'password': password,
-      });
+      }, stayLogged);
     } else {
       setShowError(true);
       setError('Error');
@@ -55,7 +58,6 @@ export default function SignIn({handleLogin, admin}) {
           </Avatar>
           <Box
             component="form"
-            fullWidth
             onSubmit={handleSubmit}
             noValidate
             sx={{
@@ -80,6 +82,18 @@ export default function SignIn({handleLogin, admin}) {
               errMsg = {error}
               valid={
                 !showError || validate('admin', 'Contraseña', password)}/>
+            <FormGroup>
+              <FormControlLabel
+                sx={{ml: 0.05}}
+                control={
+                  <Checkbox
+                    checked={stayLogged}
+                    onChange={(e) => setStayLogged(e.target.checked)}
+                  />
+                }
+                label="No cerrar sesión"
+              />
+            </FormGroup>
             <Button
               fullWidth
               variant="contained"
@@ -91,6 +105,10 @@ export default function SignIn({handleLogin, admin}) {
             >
             Iniciar sesión
             </Button>
+            {signUpError &&
+            <Alert severity="error">
+              Los datos ingresados son incorrectos
+            </Alert>}
           </Box>
         </Box>
       </Container>

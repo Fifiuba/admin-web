@@ -11,10 +11,19 @@ import signin from './services/sign-in.js';
 
 function App() {
   const [admin, setAdmin] = useState(null);
+  const [signUpError, setSignUpError] = useState(false);
 
-  const handleLogin = async (admin) => {
-    // hacer request y setear datos del admin
-    signin(admin,setAdmin);
+  const handleLogin = async (admin, stayLogged) => {
+    const loggedAdmin = await signin(admin, stayLogged);
+    // signup error
+    if (!loggedAdmin) {
+      setSignUpError(true);
+      setTimeout(() => {
+        setSignUpError(false);
+      }, 5000);
+    } else {
+      setAdmin(loggedAdmin);
+    }
   };
 
   const handleLogout = () => {
@@ -28,10 +37,14 @@ function App() {
       <Routes>
         <Route
           index
-          element={<SignIn handleLogin={handleLogin} admin={admin}/>}/>
-        <Route path="ingresar"
           element={<SignIn handleLogin={handleLogin}
-            admin={admin}/>}
+            admin={admin}
+            signUpError={signUpError}/>}/>
+        <Route path="ingresar"
+          element={<SignIn
+            handleLogin={handleLogin}
+            admin={admin}
+            signUpError={signUpError}/>}
         />
         <Route path="registrar" element={<SignUp admin={admin}/>} />
         <Route element={<ProtectedRoute admin={admin}/>}>
