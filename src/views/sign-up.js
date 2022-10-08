@@ -8,6 +8,8 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {Navigate} from 'react-router-dom';
 import ValidationField from '../components/validation-field';
 import validate from '../utils/validation';
+import signupAdmin from '../services/sign-up';
+import {Alert} from '@mui/material';
 
 const theme = createTheme();
 
@@ -19,14 +21,32 @@ export default function SignUp({admin}) {
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [submitError, setSubmitError] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validate('admin', 'Nombre', name) &&
         validate('admin', 'Apellido', lastname) &&
         validate('admin', 'Correo electrónico', email) &&
         validate('admin', 'Contraseña', password)) {
-      alert('Guardar datos');
+      const success = await signupAdmin({
+        'name': name,
+        'last_name': lastname,
+        'email': email,
+        'password': password,
+      });
+      if (!success) {
+        setSubmitError(true);
+        setTimeout(() => {
+          setSubmitError(false);
+        }, 3000);
+      } else {
+        setSubmitSuccess(true);
+        setTimeout(() => {
+          setSubmitSuccess(false);
+        }, 3000);
+      }
     } else {
       setShowError(true);
       alert('Mostrar error');
@@ -43,6 +63,7 @@ export default function SignUp({admin}) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <Typography component="h1" variant="h5">
@@ -79,6 +100,16 @@ export default function SignUp({admin}) {
               label="Contraseña"
               onChange={setPassword}
               valid={!showError || validate('admin', 'Contraseña', password)}/>
+            {submitError &&
+              <Alert severity="error">
+                Ocurrio un error. Intente nuevamente
+              </Alert>
+            }
+            {submitSuccess &&
+              <Alert severity="success">
+                Se creo el administrador correctamente
+              </Alert>
+            }
             <Button
               fullWidth
               variant="contained"
