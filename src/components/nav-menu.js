@@ -60,10 +60,6 @@ export default function NavMenu({handleLogout}) {
         >
           <MenuItem onClick={handleCloseNavMenu}>
             <Button component={RouterLink} to="/inicio">Inicio</Button>
-            <Button component={RouterLink} to="/registrar">
-              Registrar administrador
-            </Button>
-            <Button component={RouterLink} to="/inicio">Opción#2</Button>
           </MenuItem>
         </Menu>
       </Box>
@@ -74,18 +70,6 @@ export default function NavMenu({handleLogout}) {
           sx={{my: 2, color: 'white', display: 'block'}}
         >
                 Inicio
-        </Button>
-        <Button component={RouterLink}
-          to="/registrar"
-          sx={{my: 2, color: 'white', display: 'block'}}
-        >
-                + Admin
-        </Button>
-        <Button component={RouterLink}
-          to="/inicio"
-          sx={{my: 2, color: 'white', display: 'block'}}
-        >
-                Opción#2
         </Button>
       </Box>
 

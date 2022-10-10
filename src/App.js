@@ -7,6 +7,8 @@ import Profile from './views/profile.js';
 import Navbar from './components/navbar.js';
 import {ProtectedRoute} from './components/protected-route.js';
 import signin from './services/sign-in.js';
+import UsersAdministration from './views/users-administration.js';
+import DriversAdministration from './views/drivers-administration.js';
 
 
 function App() {
@@ -51,6 +53,8 @@ function App() {
         <Route element={<ProtectedRoute admin={admin}/>}>
           <Route path="inicio" element={<Home admin={admin}/>} />
           <Route path="perfil" element={<Profile admin={admin}/>} />
+          <Route path="usuarios" element={<UsersAdministration/>} />
+          <Route path="choferes" element={<DriversAdministration/>} />
         </Route>
       </Routes>
     </BrowserRouter>
