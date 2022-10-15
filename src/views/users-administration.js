@@ -1,7 +1,7 @@
 import {Box} from '@mui/system';
 import ArrowBackIosNewOutlinedIcon
   from '@mui/icons-material/ArrowBackIosNewOutlined';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -13,12 +13,15 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import {styled} from '@mui/material/styles';
 import SearchBar from '../components/search-bar';
+import getUsersByRole from '../services/get-users-by-role';
+import CircularProgress from '@mui/material/CircularProgress';
+import {Container} from '@mui/material';
 
 const fields = [
   {id: 'id', name: 'ID'},
   {id: 'name', name: 'Nombre'},
   {id: 'email', name: 'Correo electrónico'},
-  {id: 'phone', name: 'Teléfono'},
+  {id: 'phone_number', name: 'Teléfono'},
   {id: 'age', name: 'Edad'},
 ];
 
@@ -30,34 +33,40 @@ const columns = [
     label: 'Correo electrónico',
     minWidth: 100,
   },
-  {id: 'phone', label: 'Teléfono', minWidth: 50},
+  {id: 'phone_number', label: 'Teléfono', minWidth: 50},
   {id: 'age', label: 'Edad', minWidth: 50},
 ];
 
-function createData(id, name, email, phone, age) {
-  return {id, name, email, phone, age};
-}
-
-const rows = [
-  createData('0', 'Franco', 'fdgomez@fi.uba.ar', '3446313831', '24'),
-  createData('1', 'Alejo', 'alejo@fi.uba.ar', '3446121314', '22'),
-  createData('2', 'Agustina', 'agus@fi.uba.ar', '3446313831', '23'),
-  createData('3', 'Sol', 'sol@fi.uba.ar', '3446313831', '25'),
-  createData('4', 'Pablo', 'pablo@fi.uba.ar', '3446313831', '21'),
-  createData('5', 'Pablo', 'pablo2@fi.uba.ar', '3446313831', '27'),
-  createData('6', 'Pablo', 'pablo3@fi.uba.ar', '3446313831', '40'),
-  createData('7', 'Franco', 'franco@fi.uba.ar', '3446313831', '24'),
-  createData('8', 'Alejo', 'alejo2@fi.uba.ar', '3446313831', '22'),
-  createData('9', 'Agustina', 'agus2@fi.uba.ar', '3446313831', '23'),
-  createData('10', 'Sol', 'sol2@fi.uba.ar', '3446313831', '25'),
-  createData('11', 'Pablo', 'aaaaa@fi.uba.ar', '3446313831', '21'),
-  createData('12', 'Pablo', 'bbbbb@fi.uba.ar', '3446313831', '27'),
-  createData('13', 'Pablo', 'cccc@fi.uba.ar', '3446313831', '40'),
-];
+let rows = [];
 
 export default function UsersAdministration() {
-  const [users, setUsers] = React.useState(rows);
+  const [users, setUsers] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [by, setBy] = React.useState('name');
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getUsersByRole('passenger').then((res) => {
+      if (res.status == 200 || res.status == 202) {
+        rows = res.data;
+        setLoading(false);
+        setUsers(rows);
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return <Container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: '10em'}}
+    >
+      <CircularProgress />
+    </Container>;
+  }
 
   const handleSearch = (value) => {
     if (value !== '') {
@@ -73,9 +82,6 @@ export default function UsersAdministration() {
     setUsers(rows);
     setBy(value);
   };
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -96,8 +102,6 @@ export default function UsersAdministration() {
       fontSize: 14,
     },
   }));
-
-  const navigate = useNavigate();
 
   return (
     <Box sx={{padding: '1em'}}>

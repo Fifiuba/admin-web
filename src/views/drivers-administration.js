@@ -1,7 +1,7 @@
 import {Box} from '@mui/system';
 import ArrowBackIosNewOutlinedIcon
   from '@mui/icons-material/ArrowBackIosNewOutlined';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -13,6 +13,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import {styled} from '@mui/material/styles';
 import SearchBar from '../components/search-bar';
+import getUsersByRole from '../services/get-users-by-role';
+import CircularProgress from '@mui/material/CircularProgress';
+import {Container} from '@mui/material';
 
 const fields = [
   {id: 'id', name: 'ID'},
@@ -20,8 +23,6 @@ const fields = [
   {id: 'email', name: 'Correo electrónico'},
   {id: 'phone', name: 'Teléfono'},
   {id: 'age', name: 'Edad'},
-  {id: 'car', name: 'Auto'},
-  {id: 'model', name: 'Modelo'},
 ];
 
 const columns = [
@@ -32,50 +33,40 @@ const columns = [
     label: 'Correo electrónico',
     minWidth: 100,
   },
-  {id: 'phone', label: 'Teléfono', minWidth: 50},
+  {id: 'phone_number', label: 'Teléfono', minWidth: 50},
   {id: 'age', label: 'Edad', minWidth: 50},
-  {id: 'car', label: 'Auto', minWidth: 50},
-  {id: 'model', label: 'Modelo', minWidth: 50},
 ];
 
-function createData(id, name, email, phone, age, car, model) {
-  return {id, name, email, phone, age, car, model};
-}
-
-const rows = [
-  createData('0', 'Franco', 'fdgomez@fi.uba.ar',
-      '3446313831', '24', 'Toyota', 'Ethios'),
-  createData('1', 'Alejo', 'alejo@fi.uba.ar',
-      '3446121314', '22', 'Toyota', 'Ethios'),
-  createData('2', 'Agustina', 'agus@fi.uba.ar',
-      '3446313831', '23', 'Toyota', 'Ethios'),
-  createData('3', 'Sol', 'sol@fi.uba.ar',
-      '3446313831', '25', 'Toyota', 'Ethios'),
-  createData('4', 'Pablo', 'pablo@fi.uba.ar',
-      '3446313831', '21', 'Toyota', 'Ethios'),
-  createData('5', 'Pablo', 'pablo2@fi.uba.ar',
-      '3446313831', '27', 'Toyota', 'Ethios'),
-  createData('6', 'Pablo', 'pablo3@fi.uba.ar',
-      '3446313831', '40', 'Toyota', 'Ethios'),
-  createData('7', 'Franco', 'franco@fi.uba.ar',
-      '3446313831', '24', 'Toyota', 'Ethios'),
-  createData('8', 'Alejo', 'alejo2@fi.uba.ar',
-      '3446313831', '22', 'Toyota', 'Ethios'),
-  createData('9', 'Agustina', 'agus2@fi.uba.ar',
-      '3446313831', '23', 'Toyota', 'Ethios'),
-  createData('10', 'Sol', 'sol2@fi.uba.ar',
-      '3446313831', '25', 'Toyota', 'Ethios'),
-  createData('11', 'Pablo', 'aaaaa@fi.uba.ar',
-      '3446313831', '21', 'Toyota', 'Ethios'),
-  createData('12', 'Pablo', 'bbbbb@fi.uba.ar',
-      '3446313831', '27', 'Toyota', 'Ethios'),
-  createData('13', 'Pablo', 'cccc@fi.uba.ar',
-      '3446313831', '40', 'Toyota', 'Ethios'),
-];
+let rows = [];
 
 export default function DriversAdministration() {
-  const [drivers, setDrivers] = React.useState(rows);
+  const [drivers, setDriver] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [by, setBy] = React.useState('name');
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getUsersByRole('driver').then((res) => {
+      if (res.status == 200 || res.status == 202) {
+        rows = res.data;
+        setLoading(false);
+        setDriver(rows);
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return <Container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: '10em'}}
+    >
+      <CircularProgress />
+    </Container>;
+  }
 
   const handleSearch = (value) => {
     if (value !== '') {
@@ -91,9 +82,6 @@ export default function DriversAdministration() {
     setDrivers(rows);
     setBy(value);
   };
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -114,8 +102,6 @@ export default function DriversAdministration() {
       fontSize: 14,
     },
   }));
-
-  const navigate = useNavigate();
 
   return (
     <Box sx={{padding: '1em'}}>
