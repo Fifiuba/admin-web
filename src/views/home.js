@@ -1,48 +1,51 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import PersonOutlineSharpIcon from '@mui/icons-material/PersonOutlineSharp';
+import SupervisorAccountOutlinedIcon
+  from '@mui/icons-material/SupervisorAccountOutlined';
+import AccountCircleOutlinedIcon
+  from '@mui/icons-material/AccountCircleOutlined';
+import DriveEtaOutlinedIcon from '@mui/icons-material/DriveEtaOutlined';
+import Tile from '../components/tile';
+
+const iconsProps = {height: '75px', width: '75px'};
+const tiles = [
+  'Visualizar usuarios',
+  'Visualizar choferes',
+  'Perfil',
+  'Registrar administrador',
+];
+const redirects = ['/usuarios', '/choferes', '/perfil', '/registrar'];
+const icons = [
+  <PersonOutlineSharpIcon key={1} color='primary'sx={iconsProps} />,
+  <DriveEtaOutlinedIcon key={2} color='primary'sx={iconsProps} />,
+  <AccountCircleOutlinedIcon key={3} color='primary'sx={iconsProps} />,
+  <SupervisorAccountOutlinedIcon key={4} color='primary'sx={iconsProps} />,
+];
+
+const theme = createTheme();
 
 export default function Home({admin}) {
   return (
-    <div>
-      <h1>Admin: {admin.name}</h1>
-      <Link to="/perfil">  Perfil  </Link>
-      <Link to="/registrar">  Registrar administrador  </Link>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container sx={{py: 8}}>
+        <Grid container spacing={2}>
+          {tiles.map((tile, idx) => {
+            return (
+              <Grid key={idx} item>
+                <Tile
+                  path={redirects[idx]}
+                  title={tile}
+                  icon={icons[idx]}>
+                </Tile>
+              </Grid>);
+          })}
+        </Grid>
+      </Container>
+    </ThemeProvider>
   );
 }
-/* import React from 'react';
-  import Button from '@material-ui/core/Button';
-  import Menu from '@material-ui/core/Menu';
-  import MenuItem from '@material-ui/core/MenuItem';
-
-  export default function SimpleMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-
-    return (
-      <div>
-        <Button aria-controls="simple-menu"
-        aria-haspopup="true" onClick={handleClick}>
-          Open Menu
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </Menu>
-      </div>
-    );
-  }*/
