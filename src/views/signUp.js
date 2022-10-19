@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {Navigate} from 'react-router-dom';
-import ValidationField from '../components/validation-field';
+import ValidationField from '../components/validationField';
 import validate from '../utils/validation';
-import signupAdmin from '../services/sign-up';
+import signupAdmin from '../services/signUp';
 import {Alert} from '@mui/material';
 
 const theme = createTheme();

@@ -2,8 +2,8 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import NavLogo from './nav-logo';
-import NavMenu from './nav-menu';
+import NavLogo from './navLogo';
+import NavMenu from './navMenu';
 
 const Navbar = ({admin, handleLogout}) => {
   return (

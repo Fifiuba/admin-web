@@ -12,10 +12,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import {styled} from '@mui/material/styles';
-import SearchBar from '../components/search-bar';
-import getUsersByRole from '../services/get-users-by-role';
+import SearchBar from '../components/searchBar';
+import getUsersByRole from '../services/getUsersByRole';
 import CircularProgress from '@mui/material/CircularProgress';
 import {Container} from '@mui/material';
+import DriverProfile from '../components/driverProfile';
 
 const fields = [
   {id: 'id', name: 'ID'},
@@ -35,6 +36,7 @@ const columns = [
   },
   {id: 'phone_number', label: 'Teléfono', minWidth: 50},
   {id: 'age', label: 'Edad', minWidth: 50},
+  {id: 'info', label: 'Ver', align: 'center'},
 ];
 
 let rows = [];
@@ -148,13 +150,23 @@ export default function DriversAdministration() {
                           key={row.code}>
                           {columns.map((column) => {
                             const value = row[column.id];
-                            return (
-                              <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === 'number' ?
-                                column.format(value) :
-                                value}
-                              </TableCell>
-                            );
+                            if (column.id != 'info') {
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  {column.format && typeof value === 'number' ?
+                                  column.format(value) :
+                                  value}
+                                </TableCell>
+                              );
+                            } else {
+                              return (
+                                <TableCell key={column.id} align="center">
+                                  <DriverProfile
+                                    driver={row}
+                                    role="driver"
+                                    title="Conductor"/>
+                                </TableCell>);
+                            }
                           })}
                         </TableRow>
                       );
