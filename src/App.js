@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import SignIn from './views/sign-in.js';
-import SignUp from './views/sign-up.js';
+import SignIn from './views/signIn.js';
+import SignUp from './views/signUp.js';
 import Home from './views/home.js';
 import Profile from './views/profile.js';
-import Navbar from './components/navbar.js';
-import {ProtectedRoute} from './components/protected-route.js';
-import signin from './services/sign-in.js';
-import UsersAdministration from './views/users-administration.js';
-import DriversAdministration from './views/drivers-administration.js';
+import Navbar from './components/navBar.js';
+import {ProtectedRoute} from './components/protectedRoute.js';
+import signin from './services/signIn.js';
+import UsersAdministration from './views/usersAdministration.js';
+import DriversAdministration from './views/driversAdministration.js';
 
 
 function App() {

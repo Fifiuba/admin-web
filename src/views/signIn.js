@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import ValidationField from '../components/validation-field';
+import ValidationField from '../components/validationField';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {blue} from '@mui/material/colors';
 import validate from '../utils/validation';

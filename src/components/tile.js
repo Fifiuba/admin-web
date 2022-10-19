@@ -31,7 +31,7 @@ export default function Tile({title, icon, path}) {
           variant="p"
           component="p"
           align='center'
-          sx={{fontWeight: '900', color: '#1976d2'}}
+          sx={{fontFamily: 'Arial', fontWeight: '900', color: '#1976d2'}}
         >
           {title}
         </Typography>
