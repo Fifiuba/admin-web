@@ -1,0 +1,12 @@
+version: "1.0"
+
+# Declaro los servicios a utilizar
+services:
+
+  frontend:
+    build: frontend
+    ports:
+      - 3000
+    volumes:
+      - frontend:/src
+    command: npm start
