@@ -1,4 +1,4 @@
-##Web de administradores
+<h1>Web de administradores</h1>
 
 ## Indice de informacion
 1. **Instalacion de dependencias**
