@@ -7,12 +7,12 @@
 
 ### Tecnologías utilizadas.
 
-**ReactJS (Framework para construir Single Page Application)
-**Axios (Cliente HTTP)
-**React Hook Form (Validación de formularios)
-**MUI (Material Design)
-**Eslint (Linter javascript)
-**Firebase (Login)
+- ReactJS (Framework para construir Single Page Application)
+- Axios (Cliente HTTP)
+- React Hook Form (Validación de formularios)
+- MUI (Material Design)
+- Eslint (Linter javascript)
+- Firebase (Login)
 
 ### Instalación del entorno
 
