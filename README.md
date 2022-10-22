@@ -1,4 +1,4 @@
-#Web de administradores
+##Web de administradores
 
 ## Indice de informacion
 1. **Instalacion de dependencias**
