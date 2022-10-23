@@ -1,9 +1,9 @@
 <h1>Web de administradores</h1>
 
 ## Indice de informacion
-1. **Instalacion de dependencias**
+1. **Tecnologías utilizadas**
+1. **Ejecutar localmente**
 2. **Propósito del servicio de administradores**
-3. **Datalles de implementación**
 
 ### Tecnologías utilizadas.
 
@@ -14,7 +14,7 @@
 - Eslint (Linter javascript)
 - Firebase (Login)
 
-### Instalación del entorno
+### Ejecutar localmente
 
 Pasos para levantar el frontend local una vez clonado el repositorio.
 
