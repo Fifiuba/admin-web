@@ -21,7 +21,7 @@ function editAdmin(admin) {
   };
 
   return axios
-      .patch('http://localhost:8000/admins/me/',
+      .patch('https://backend-alejovillores.cloud.okteto.net/admins/me/',
           {'name': admin.name,
             'last_name': admin.last_name}
           , config);

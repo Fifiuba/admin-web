@@ -14,7 +14,7 @@ const Constraints = {
       'min': 3,
     },
     'Correo electrónico': {
-      'max': 20,
+      'max': 100,
       'min': 3,
       'checkEmail': true,
     },

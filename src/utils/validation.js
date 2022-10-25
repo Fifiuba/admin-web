@@ -18,6 +18,7 @@ export default function validate(entity, label, value) {
       });
     }
   });
+  console.log(entity, label, value, valid);
   return valid;
 }
 
