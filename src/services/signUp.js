@@ -21,7 +21,7 @@ function addAdmin(newAdmin) {
   };
 
   return axios
-      .post('http://localhost:8000/admins',
+      .post('https://backend-alejovillores.cloud.okteto.net/admins',
           {'name': newAdmin.name,
             'last_name': newAdmin.last_name,
             'email': newAdmin.email,

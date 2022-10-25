@@ -11,6 +11,6 @@ export default async function getUserByIdRole(id, role) {
 
 function getUsers(id, role) {
   return axios
-      .get('http://localhost:8000/users/' + id,
+      .get('https://backend-agustinaa235.cloud.okteto.net/users/' + id,
           {params: {user_type: role}});
 }

@@ -97,6 +97,7 @@ export default function SignUp({admin}) {
             <ValidationField
               enabled={true}
               value={password}
+              type="password"
               label="Contraseña"
               onChange={setPassword}
               valid={!showError || validate('admin', 'Contraseña', password)}/>
