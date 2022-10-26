@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import NavLogo from './navLogo';
 import NavMenu from './navMenu';
 
-const Navbar = ({admin, handleLogout}) => {
+const NavBar = ({admin, handleLogout}) => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -18,4 +18,4 @@ const Navbar = ({admin, handleLogout}) => {
   );
 };
 
-export default Navbar;
+export default NavBar;
