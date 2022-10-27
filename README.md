@@ -47,7 +47,7 @@ Las funcionalidades implementadas hasta el momento son:
 - Visualizar perfil de usuarios de la aplicación.
 
 ### Host
-[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://admin-web-franco-gmz.cloud.okteto.net/)
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://admin-web-franco-gmz.cloud.okteto.net/)]
 
 ###Credenciales
 - Correo electrónico: adminfiuba@fiuba.com
