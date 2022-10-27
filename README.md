@@ -46,9 +46,9 @@ Las funcionalidades implementadas hasta el momento son:
 - Registrar otro administrador.
 - Visualizar perfil de usuarios de la aplicación.
 
-### Host
-[![Develop on Okteto]](https://okteto.com/develop-okteto.svg)](https://admin-web-franco-gmz.cloud.okteto.net/)
-
 ###Credenciales
 - Correo electrónico: adminfiuba@fiuba.com
 - Contraseña: adminfiuba
+
+### Host
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://admin-web-franco-gmz.cloud.okteto.net/)
