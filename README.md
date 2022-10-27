@@ -2,8 +2,10 @@
 
 ## Indice de informacion
 1. **Tecnologías utilizadas**
-1. **Ejecutar localmente**
-2. **Propósito del servicio de administradores**
+2. **Ejecutar localmente**
+3. **Propósito del servicio de administradores**
+4. **Host**
+5. **Credenciales**
 
 ### Tecnologías utilizadas.
 
@@ -43,3 +45,10 @@ Las funcionalidades implementadas hasta el momento son:
 - Visualización y edición de perfil.
 - Registrar otro administrador.
 - Visualizar perfil de usuarios de la aplicación.
+
+### Host
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://admin-web-franco-gmz.cloud.okteto.net/)
+
+##Credenciales
+- Correo electrónico: adminfiuba@fiuba.com
+- Contraseña: adminfiuba
