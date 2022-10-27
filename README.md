@@ -7,7 +7,7 @@
 4. **Host**
 5. **Credenciales**
 
-### Tecnologías utilizadas.
+## Tecnologías utilizadas.
 
 - ReactJS (Framework para construir Single Page Application)
 - Axios (Cliente HTTP)
@@ -16,7 +16,7 @@
 - Eslint (Linter javascript)
 - Firebase (Login)
 
-### Ejecutar localmente
+## Ejecutar localmente
 
 Pasos para levantar el frontend local una vez clonado el repositorio.
 
@@ -35,7 +35,7 @@ Ejecutar linter a traves de script.
 npm run eslint
 ```
 
-### Propósito de la web de administradores
+## Propósito de la web de administradores
 ---
 El proposito de la web de administradores es proveer a los mismos la funcionalidades de gestión de los usuarios de la aplicación, tanto pasajeros como conductores. A su vez, también se tiene la posibilidad de registrar otros administradores.
 
@@ -46,11 +46,11 @@ Las funcionalidades implementadas hasta el momento son:
 - Registrar otro administrador.
 - Visualizar perfil de usuarios de la aplicación.
 
-###Credenciales
+##Credenciales
 ---
 - Correo electrónico: adminfiuba@fiuba.com
 - Contraseña: adminfiuba
 
-### Host
+## Host
 ---
 [![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://admin-web-franco-gmz.cloud.okteto.net/)
