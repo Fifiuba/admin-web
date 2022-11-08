@@ -48,7 +48,7 @@ Las funcionalidades implementadas hasta el momento son:
 
 ## Credenciales
 ---
-- Correo electrónico: adminfiuba@fiuba.com
+- Correo electrónico: admin@fiuba.com
 - Contraseña: adminfiuba
 
 ## Host
