@@ -4,7 +4,7 @@ import SignIn from './views/signIn.js';
 import SignUp from './views/signUp.js';
 import Home from './views/home.js';
 import Profile from './views/profile.js';
-import NavBar from './components/navBar.js';
+import NavBar from './components/navbar.js';
 import {ProtectedRoute} from './components/protectedRoute.js';
 import signin from './services/signIn.js';
 import UsersAdministration from './views/usersAdministration.js';
