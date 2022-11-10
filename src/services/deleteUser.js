@@ -16,6 +16,6 @@ function deleteUserById(id, role) {
   }
   return axios
       .delete('https://backend-agustinaa235.cloud.okteto.net/users/' + id,
-          {params: {user_type: role},
+          {data: {user_type: role},
             headers: {Authorization: `Bearer ${token}`}});
 }

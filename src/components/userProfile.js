@@ -24,7 +24,7 @@ export default function UserProfile({user, role, title}) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = React.useState(true);
   const [info, setInfo] = React.useState({});
-
+  console.log(user);
   useEffect(() => {
     if (open) {
       getUserByIdRole(user.id, role).then((res) => {
@@ -93,7 +93,8 @@ export default function UserProfile({user, role, title}) {
             <Avatar
               sx={{width: '150px', height: '150px'}}
               alt="user-image"
-              src={user.picture} />
+              src={user.picture}
+            />
           </Container>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>

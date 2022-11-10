@@ -40,7 +40,7 @@ export default function Tile({topTitle, title, icon, path}) {
             {topTitle}
           </Typography>
           <Typography
-            sx={{fontSize: 18, textAlign: 'left', fontWeight: 800,
+            sx={{fontSize: 18, textAlign: 'left', fontWeight: 700,
               display: 'inline'}}
             color="text.secondary"
           >
@@ -52,7 +52,7 @@ export default function Tile({topTitle, title, icon, path}) {
             display: 'flex',
             padding: '.5em',
             position: 'relative',
-            top: '-20px',
+            top: '-10px',
             right: '-17%',
           }}
         >

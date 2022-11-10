@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 
-export default function NavMenu({handleLogout}) {
+export default function NavMenu({handleLogout, admin}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElAdmin, setAnchorElAdmin] = React.useState(null);
 
@@ -79,7 +79,9 @@ export default function NavMenu({handleLogout}) {
           <IconButton onClick={handleOpenAdminMenu}
             sx={{position: 'fixed', right: 0}}
           >
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar>
+              {admin.name.charAt(0)}{admin.last_name.charAt(0)}
+            </Avatar>
           </IconButton>
         </Tooltip>
         <Menu

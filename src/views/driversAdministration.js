@@ -1,8 +1,5 @@
 import {Box} from '@mui/system';
-import ArrowBackIosNewOutlinedIcon
-  from '@mui/icons-material/ArrowBackIosNewOutlined';
 import React, {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -51,7 +48,6 @@ export default function DriversAdministration() {
   const [by, setBy] = React.useState('name');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getUsersByRole('driver').then((res) => {
@@ -120,12 +116,6 @@ export default function DriversAdministration() {
 
   return (
     <Box sx={{padding: '1em'}}>
-      <Box sx={{display: 'flex', justifyContent: 'left', padding: '1em'}}>
-        <ArrowBackIosNewOutlinedIcon
-          onClick={() => navigate('/inicio')}
-          color='primary'
-        />
-      </Box>
       <Box sx={{display: 'flex', justifyContent: 'center', padding: '1em'}}>
         <SearchBar
           onSearch={handleSearch}
