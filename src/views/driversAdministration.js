@@ -1,8 +1,5 @@
 import {Box} from '@mui/system';
-import ArrowBackIosNewOutlinedIcon
-  from '@mui/icons-material/ArrowBackIosNewOutlined';
 import React, {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,9 +11,11 @@ import TableRow from '@mui/material/TableRow';
 import {styled} from '@mui/material/styles';
 import SearchBar from '../components/searchBar';
 import getUsersByRole from '../services/getUsersByRole';
+import deleteUser from '../services/deleteUser';
 import CircularProgress from '@mui/material/CircularProgress';
 import {Container} from '@mui/material';
 import DriverProfile from '../components/driverProfile';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const fields = [
   {id: 'id', name: 'ID'},
@@ -37,6 +36,7 @@ const columns = [
   {id: 'phone_number', label: 'Teléfono', minWidth: 50},
   {id: 'age', label: 'Edad', minWidth: 50},
   {id: 'info', label: 'Ver', align: 'center'},
+  {id: 'delete', label: 'Eliminar', align: 'center'},
 ];
 
 let rows = [];
@@ -44,10 +44,10 @@ let rows = [];
 export default function DriversAdministration() {
   const [drivers, setDriver] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [deleting, setDeleting] = React.useState(false);
   const [by, setBy] = React.useState('name');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getUsersByRole('driver').then((res) => {
@@ -57,7 +57,7 @@ export default function DriversAdministration() {
         setDriver(rows);
       }
     });
-  }, []);
+  }, [deleting]);
 
   if (loading) {
     return <Container
@@ -94,6 +94,15 @@ export default function DriversAdministration() {
     setPage(0);
   };
 
+  const handleDeleteUser = (id) => {
+    deleteUser(id, 'driver').then((res) => {
+      if (res.status == 200) {
+        setLoading(true);
+        setDeleting(!deleting);
+      }
+    });
+  };
+
   const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#1976d2',
@@ -107,12 +116,6 @@ export default function DriversAdministration() {
 
   return (
     <Box sx={{padding: '1em'}}>
-      <Box sx={{display: 'flex', justifyContent: 'left', padding: '1em'}}>
-        <ArrowBackIosNewOutlinedIcon
-          onClick={() => navigate('/inicio')}
-          color='primary'
-        />
-      </Box>
       <Box sx={{display: 'flex', justifyContent: 'center', padding: '1em'}}>
         <SearchBar
           onSearch={handleSearch}
@@ -150,7 +153,7 @@ export default function DriversAdministration() {
                           key={row.code}>
                           {columns.map((column) => {
                             const value = row[column.id];
-                            if (column.id != 'info') {
+                            if (column.id != 'info' && column.id != 'delete') {
                               return (
                                 <TableCell key={column.id} align={column.align}>
                                   {column.format && typeof value === 'number' ?
@@ -158,6 +161,13 @@ export default function DriversAdministration() {
                                   value}
                                 </TableCell>
                               );
+                            } else if (column.id == 'delete') {
+                              return (
+                                <TableCell key={column.id} align="center">
+                                  <DeleteIcon
+                                    onClick={() =>
+                                      handleDeleteUser(row.id, 'driver')}/>
+                                </TableCell>);
                             } else {
                               return (
                                 <TableCell key={column.id} align="center">

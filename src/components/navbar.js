@@ -7,11 +7,13 @@ import NavMenu from './navMenu';
 
 const NavBar = ({admin, handleLogout}) => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavLogo/>
-          {admin && <NavMenu handleLogout={() => handleLogout(admin)}/>}
+          {admin &&
+            <NavMenu admin={admin} handleLogout={() => handleLogout(admin)}/>
+          }
         </Toolbar>
       </Container>
     </AppBar>
