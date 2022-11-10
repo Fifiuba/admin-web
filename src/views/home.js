@@ -11,10 +11,14 @@ import AccountCircleOutlinedIcon
 import DriveEtaOutlinedIcon from '@mui/icons-material/DriveEtaOutlined';
 import Tile from '../components/tile';
 
-const iconsProps = {height: '75px', width: '75px'};
+const iconsProps = {
+  fontSize: '5rem',
+  fontWeight: '100',
+};
+
 const tiles = [
-  'Visualizar usuarios',
-  'Visualizar choferes',
+  'Gestionar usuarios',
+  'Gestionar choferes',
   'Perfil',
   'Registrar administrador',
 ];
@@ -29,17 +33,24 @@ const icons = [
 const theme = createTheme();
 
 export default function Home({admin}) {
+  const topTitles = [
+    'Pasajeros',
+    'Conductores',
+    'Administradores',
+    'Administradores',
+  ];
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container sx={{py: 8}}>
-        <Grid container spacing={2}>
+      <Container sx={{py: 8, justifyContent: 'center'}}>
+        <Grid container spacing={1}>
           {tiles.map((tile, idx) => {
             return (
               <Grid key={idx} item>
                 <Tile
                   path={redirects[idx]}
                   title={tile}
+                  topTitle={topTitles[idx]}
                   icon={icons[idx]}>
                 </Tile>
               </Grid>);

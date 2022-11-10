@@ -17,6 +17,8 @@ import getUsersByRole from '../services/getUsersByRole';
 import CircularProgress from '@mui/material/CircularProgress';
 import {Container} from '@mui/material';
 import UserProfile from '../components/userProfile';
+import DeleteIcon from '@mui/icons-material/Delete';
+import deleteUser from '../services/deleteUser';
 
 const fields = [
   {id: 'id', name: 'ID'},
@@ -105,6 +107,15 @@ export default function UsersAdministration() {
     },
   }));
 
+  const handleDeleteUser = (id) => {
+    deleteUser(id, 'passenger').then((res) => {
+      if (res.status == 200) {
+        setLoading(true);
+        setDeleting(!deleting);
+      }
+    });
+  };
+
   return (
     <Box sx={{padding: '1em'}}>
       <Box sx={{display: 'flex', justifyContent: 'left', padding: '1em'}}>
@@ -150,7 +161,7 @@ export default function UsersAdministration() {
                           key={row.code}>
                           {columns.map((column) => {
                             const value = row[column.id];
-                            if (column.id != 'info') {
+                            if (column.id != 'info' && column.id != 'delete') {
                               return (
                                 <TableCell key={column.id} align={column.align}>
                                   {column.format && typeof value === 'number' ?
@@ -158,6 +169,13 @@ export default function UsersAdministration() {
                                   value}
                                 </TableCell>
                               );
+                            } else if (column.id == 'delete') {
+                              return (
+                                <TableCell key={column.id} align="center">
+                                  <DeleteIcon
+                                    onClick= {() =>
+                                      handleDeleteUser(row.id, 'passenger')}/>
+                                </TableCell>);
                             } else {
                               return (
                                 <TableCell key={column.id} align="center">
