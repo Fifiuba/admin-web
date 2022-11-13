@@ -42,7 +42,7 @@ const columns = [
 let rows = [];
 
 export default function DriversAdministration() {
-  const [drivers, setDriver] = React.useState([]);
+  const [drivers, setDrivers] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [deleting, setDeleting] = React.useState(false);
   const [by, setBy] = React.useState('name');
@@ -54,7 +54,7 @@ export default function DriversAdministration() {
       if (res.status == 200 || res.status == 202) {
         rows = res.data;
         setLoading(false);
-        setDriver(rows);
+        setDrivers(rows);
       }
     });
   }, [deleting]);
@@ -74,7 +74,11 @@ export default function DriversAdministration() {
     if (value !== '') {
       let aux = rows;
       aux = aux.filter((driver) => {
-        return driver[by].toLowerCase().includes(value.toLowerCase());
+        if (typeof driver[by] != 'number') {
+          return driver[by].toLowerCase().includes(value.toLowerCase());
+        } else {
+          return (driver[by] == value);
+        }
       });
       setDrivers(aux);
     } else setDrivers(rows);
