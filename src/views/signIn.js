@@ -63,7 +63,13 @@ export default function SignIn({handleLogin, admin, signUpError}) {
             sx={{
               mt: 1,
               width: '100%',
-            }}>
+            }}
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                handleSubmit(event);
+              }
+            }}
+          >
             <ValidationField
               enabled={true}
               value={email}
@@ -95,13 +101,13 @@ export default function SignIn({handleLogin, admin, signUpError}) {
               />
             </FormGroup>
             <Button
+              type="submit"
               fullWidth
               variant="contained"
               sx={{
                 mb: 2,
                 ml: 1,
               }}
-              onClick={handleSubmit}
             >
             Iniciar sesión
             </Button>
