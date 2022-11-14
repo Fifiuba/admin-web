@@ -71,11 +71,18 @@ export default function UsersAdministration() {
   }
 
   const handleSearch = (value) => {
+    console.log('by', by);
     if (value !== '') {
       let aux = rows;
+      console.log('aux', aux);
       aux = aux.filter((user) => {
-        return user[by].toLowerCase().includes(value.toLowerCase());
+        if (typeof user[by] != 'number') {
+          return user[by].toLowerCase().includes(value.toLowerCase());
+        } else {
+          return (user[by] == value);
+        }
       });
+      console.log(aux);
       setUsers(aux);
     } else setUsers(rows);
   };
