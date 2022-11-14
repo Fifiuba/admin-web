@@ -11,6 +11,7 @@ import AccountCircleOutlinedIcon
 import DriveEtaOutlinedIcon from '@mui/icons-material/DriveEtaOutlined';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import Tile from '../components/tile';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
 const iconsProps = {
   fontSize: '5rem',
@@ -20,15 +21,17 @@ const iconsProps = {
 const tiles = [
   'Gestionar usuarios',
   'Gestionar choferes',
+  'Visualizar administradores',
   'Perfil',
   'Registrar administrador',
   'Métricas',
 ];
 const redirects = ['/usuarios', '/choferes',
-  '/perfil', '/registrar', '/metricas'];
+  '/admins', '/perfil', '/registrar', '/metricas'];
 const icons = [
   <PersonOutlineSharpIcon key={1} color='primary'sx={iconsProps} />,
   <DriveEtaOutlinedIcon key={2} color='primary'sx={iconsProps} />,
+  <SupervisorAccountIcon key={2} color='primary'sx={iconsProps} />,
   <AccountCircleOutlinedIcon key={3} color='primary'sx={iconsProps} />,
   <SupervisorAccountOutlinedIcon key={4} color='primary'sx={iconsProps} />,
   <EqualizerIcon key={5} color='primary'sx={iconsProps} />,
@@ -40,6 +43,7 @@ export default function Home({admin}) {
   const topTitles = [
     'Pasajeros',
     'Conductores',
+    'Administradores',
     'Administradores',
     'Administradores',
     'Métricas',
