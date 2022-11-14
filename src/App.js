@@ -10,6 +10,7 @@ import signin from './services/signIn.js';
 import UsersAdministration from './views/usersAdministration.js';
 import DriversAdministration from './views/driversAdministration.js';
 import Metrics from './views/metrics.js';
+import AdminsAdministration from './views/adminsAdministration.js';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path="perfil" element={<Profile admin={admin}/>} />
           <Route path="usuarios" element={<UsersAdministration/>} />
           <Route path="choferes" element={<DriversAdministration/>} />
+          <Route path="admins" element={<AdminsAdministration/>} />
           <Route path="metricas" element={<Metrics/>} />
         </Route>
       </Routes>
