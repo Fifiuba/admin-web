@@ -5,6 +5,7 @@ export default async function getAddress(journeys) {
   journeys.map((journey) => {
     journey.startOn = dateformat(journey.startOn);
     journey.finishOn = dateformat(journey.finishOn);
+    journey.price = '$' + journey.price;
   });
 
   const requests = journeys.map((journey, idx) => {
