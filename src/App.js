@@ -11,6 +11,7 @@ import UsersAdministration from './views/usersAdministration.js';
 import DriversAdministration from './views/driversAdministration.js';
 import Metrics from './views/metrics.js';
 import AdminsAdministration from './views/adminsAdministration.js';
+import JourneysAdministration from './views/journeysAdministration.js';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           <Route path="usuarios" element={<UsersAdministration/>} />
           <Route path="choferes" element={<DriversAdministration/>} />
           <Route path="admins" element={<AdminsAdministration/>} />
+          <Route path="viajes" element={<JourneysAdministration/>} />
           <Route path="metricas" element={<Metrics/>} />
         </Route>
       </Routes>

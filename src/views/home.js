@@ -24,10 +24,11 @@ const tiles = [
   'Visualizar administradores',
   'Perfil',
   'Registrar administrador',
+  'Visualizar viajes',
   'Métricas',
 ];
 const redirects = ['/usuarios', '/choferes',
-  '/admins', '/perfil', '/registrar', '/metricas'];
+  '/admins', '/perfil', '/registrar', '/viajes', '/metricas'];
 const icons = [
   <PersonOutlineSharpIcon key={1} color='primary'sx={iconsProps} />,
   <DriveEtaOutlinedIcon key={2} color='primary'sx={iconsProps} />,
@@ -46,6 +47,7 @@ export default function Home({admin}) {
     'Administradores',
     'Administradores',
     'Administradores',
+    'Viajes',
     'Métricas',
   ];
   return (
