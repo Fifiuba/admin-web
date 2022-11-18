@@ -25,7 +25,7 @@ async function getAddressFromJourney(journey, key) {
   try {
     const lat = journey[key][0];
     const long = journey[key][1];
-    const response = await axios.get('http://www.mapquestapi.com/geocoding/v1/reverse', {
+    const response = await axios.get('//www.mapquestapi.com/geocoding/v1/reverse', {
       params: {
         'key': 'Plqx1ppoa0ARGH2Oo2uU5olizfNPb0Fo',
         'location': `${lat}, ${long}`,
