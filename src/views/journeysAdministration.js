@@ -37,13 +37,13 @@ export default function JourneysAdministration() {
 
   useEffect(() => {
     getJourneys().then((res) => {
-      if (res.status == 200 || res.status == 202) {
+      //if (res.status == 200 || res.status == 202) {
         rows = res.data;
         getAddress(rows).then((results) => {
           setJourneys(results);
           setLoading(false);
         });
-      }
+      //}
     });
   }, []);
 
