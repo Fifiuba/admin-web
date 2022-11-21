@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Container } from '@mui/system';
+import { Typography } from '@mui/material';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'from', headerName: 'Origen', width: 130 },
-  { field: 'to', headerName: 'Destino', width: 130 },
+  { field: 'id', headerName: 'ID', flex: 1},
+  { field: 'from', headerName: 'Origen', flex: 1},
+  { field: 'to', headerName: 'Destino', flex: 1},
   {
     field: 'value',
     headerName: 'Valor',
-    type: 'number',
-    width: 90,
+    flex: 1,
   },
 ];
 
@@ -45,27 +45,37 @@ const rows = [
 ];
 
 export default function Transactions() {
+
   return (
     <Container sx={{pt: '2rem'}}>
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: '100%'}}>
+        <Typography sx={{color: '#E1E2E1', pb: '.5em'}} variant="h4" component="div">
+        Listado de transacciones
+        </Typography>
         <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[5,10,25,50,100]}
+            pageSize={15}
+            rowsPerPageOptions={[15]}
             sx={{
-                height:'750px',
+                borderColor: '#1e85c1',
+                height:'700px',
                 '& .MuiDataGrid-columnHeaders':
-                    {color: '#fff',
-                    fontWeight: 950,},
+                    {color: '#000',
+                    backgroundColor: '#1e85c1',
+                    opacity: '0.8',},
                     '& .MuiDataGrid-row':
                     {color: '#000',
-                    backgroundColor: '#E1E2E1',
-                    opacity: '0.5',
-                    borderColor: '#E1E2E1',
+                    backgroundColor: '#fff',
+                    fontWeight: 750,
                     },
                     '& .MuiDataGrid-columnHeaderTitle':
-                    {fontWeight: 950,}
+                    {fontWeight: 950,},
+                    '& .MuiDataGrid-cell':
+                    {borderColor: '#1e85c1',},
+                    '& .MuiDataGrid-columnHeaderTitleContainer':
+                    {borderColor: '#fff',}
+                    
             }}
         />
         </div>

@@ -13,6 +13,7 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 import Tile from '../components/tile';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import NearMeIcon from '@mui/icons-material/NearMe';
+import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 
 const iconsProps = {
   fontSize: '4rem',
@@ -40,6 +41,7 @@ const icons = [
   <SupervisorAccountOutlinedIcon key={5} color='disabled'sx={iconsProps} />,
   <NearMeIcon key={6} color='disabled'sx={iconsProps} />,
   <EqualizerIcon key={7} color='disabled'sx={iconsProps} />,
+  <PaymentOutlinedIcon key={8} color='disabled'sx={iconsProps} />,
 ];
 
 const theme = createTheme();
