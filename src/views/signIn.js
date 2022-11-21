@@ -3,12 +3,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import ValidationField from '../components/validationField';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {blue} from '@mui/material/colors';
 import validate from '../utils/validation';
 import {Navigate} from 'react-router-dom';
 import {Alert, FormControlLabel, FormGroup} from '@mui/material';
@@ -50,11 +48,12 @@ export default function SignIn({handleLogin, admin, signUpError}) {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
-            FIFIUBA
-          </Typography>
-          <Avatar sx={{m: 1, bgcolor: blue[100]}}>
-            <LockOutlinedIcon color="primary"/>
+          <Avatar
+            sx={{m: 1, bgcolor: '#F5F5F6', width: '150px', height: '150px'}}
+          >
+            <LockOutlinedIcon
+              color="primary"
+              sx={{fontSize: '4rem', color: '#1e85c1'}}/>
           </Avatar>
           <Box
             component="form"

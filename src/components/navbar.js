@@ -7,7 +7,7 @@ import NavMenu from './navMenu';
 
 const NavBar = ({admin, handleLogout}) => {
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" sx={{backgroundColor: '#E1E2E1'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavLogo/>
