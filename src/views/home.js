@@ -12,44 +12,39 @@ import DriveEtaOutlinedIcon from '@mui/icons-material/DriveEtaOutlined';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import Tile from '../components/tile';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import NearMeIcon from '@mui/icons-material/NearMe';
 
 const iconsProps = {
-  fontSize: '5rem',
-  fontWeight: '100',
+  fontSize: '4rem',
+  color: '#1e85c1',
 };
 
 const tiles = [
   'Gestionar usuarios',
   'Gestionar choferes',
-  'Visualizar administradores',
+  'Administradores',
   'Perfil',
   'Registrar administrador',
   'Visualizar viajes',
   'Métricas',
+  'Transacciones',
 ];
 const redirects = ['/usuarios', '/choferes',
-  '/admins', '/perfil', '/registrar', '/viajes', '/metricas'];
+  '/admins', '/perfil', '/registrar', '/viajes', '/metricas',
+  '/transacciones'];
 const icons = [
-  <PersonOutlineSharpIcon key={1} color='primary'sx={iconsProps} />,
-  <DriveEtaOutlinedIcon key={2} color='primary'sx={iconsProps} />,
-  <SupervisorAccountIcon key={2} color='primary'sx={iconsProps} />,
-  <AccountCircleOutlinedIcon key={3} color='primary'sx={iconsProps} />,
-  <SupervisorAccountOutlinedIcon key={4} color='primary'sx={iconsProps} />,
-  <EqualizerIcon key={5} color='primary'sx={iconsProps} />,
+  <PersonOutlineSharpIcon key={1} sx={iconsProps} />,
+  <DriveEtaOutlinedIcon key={2} color='disabled'sx={iconsProps} />,
+  <SupervisorAccountIcon key={3} color='disabled'sx={iconsProps} />,
+  <AccountCircleOutlinedIcon key={4} color='disabled'sx={iconsProps} />,
+  <SupervisorAccountOutlinedIcon key={5} color='disabled'sx={iconsProps} />,
+  <NearMeIcon key={6} color='disabled'sx={iconsProps} />,
+  <EqualizerIcon key={7} color='disabled'sx={iconsProps} />,
 ];
 
 const theme = createTheme();
 
 export default function Home({admin}) {
-  const topTitles = [
-    'Pasajeros',
-    'Conductores',
-    'Administradores',
-    'Administradores',
-    'Administradores',
-    'Viajes',
-    'Métricas',
-  ];
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -61,7 +56,6 @@ export default function Home({admin}) {
                 <Tile
                   path={redirects[idx]}
                   title={tile}
-                  topTitle={topTitles[idx]}
                   icon={icons[idx]}>
                 </Tile>
               </Grid>);

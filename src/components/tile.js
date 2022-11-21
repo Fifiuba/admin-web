@@ -4,23 +4,26 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {useNavigate} from 'react-router-dom';
 import {Box} from '@mui/system';
-import {Button, CardActions} from '@mui/material';
 
-export default function Tile({topTitle, title, icon, path}) {
+export default function Tile({title, icon, path}) {
   const navigate = useNavigate();
 
   return (
     <Card
+      className='tile'
       onClick={() => navigate(path)}
       variant="outlined"
       sx={{
-        width: '300px',
+        width: '200px',
+        height: '200px',
         flexDirection: 'column',
+        borderColor: '#1e85c1',
       }}
     >
       <CardContent
         sx={{
           display: 'flex',
+          flexDirection: 'column',
           // justifyContent: 'center',
           // alignItems: 'center'
         }}
@@ -29,43 +32,27 @@ export default function Tile({topTitle, title, icon, path}) {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: '50%',
           }}
         >
           <Typography
-            sx={{fontSize: 14, textAlign: 'left', display: 'inline'}}
-            color="text.secondary"
-            gutterBottom
-          >
-            {topTitle}
-          </Typography>
-          <Typography
-            sx={{fontSize: 18, textAlign: 'left', fontWeight: 700,
+            sx={{fontSize: 16, textAlign: 'left', fontWeight: 700,
               display: 'inline'}}
-            color="text.secondary"
+            color="#1e85c1"
           >
             {title}
           </Typography>
         </Box>
         <Box
           sx={{
-            display: 'flex',
             padding: '.5em',
             position: 'relative',
-            top: '-10px',
-            right: '-17%',
+            bottom: '-50px',
+            left: '15px',
           }}
         >
           {icon}
         </Box>
       </CardContent>
-      <CardActions sx={{position: 'relative', bottom: '0'}}>
-        <Button size="small">
-          <Typography sx={{fontWeight: 600}}>
-            ABRIR
-          </Typography>
-        </Button>
-      </CardActions>
     </Card>
   );
 }

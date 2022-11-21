@@ -103,12 +103,13 @@ export default function UsersAdministration() {
 
   const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#1976d2',
+      backgroundColor: '#1e85c1',
       color: theme.palette.common.white,
       fontWeight: 900,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
+      backgroundColor: '#5d99c6',
     },
   }));
 
@@ -162,22 +163,29 @@ export default function UsersAdministration() {
                             const value = row[column.id];
                             if (column.id != 'info' && column.id != 'delete') {
                               return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number' ?
+                                <TableCell
+                                  key={column.id}
+                                  align={column.align}>
+                                  {column.format &&
+                                  typeof value === 'number' ?
                                   column.format(value) :
                                   value}
                                 </TableCell>
                               );
                             } else if (column.id == 'delete') {
                               return (
-                                <TableCell key={column.id} align="center">
+                                <TableCell
+                                  key={column.id}
+                                  align="center">
                                   <DeleteIcon
                                     onClick= {() =>
                                       handleDeleteUser(row.id, 'passenger')}/>
                                 </TableCell>);
                             } else {
                               return (
-                                <TableCell key={column.id} align="center">
+                                <TableCell
+                                  key={column.id}
+                                  align="center">
                                   <UserProfile
                                     user={row}
                                     role="passenger"
