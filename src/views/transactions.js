@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import {Container} from '@mui/system';
-import {Typography} from '@mui/material';
+import {Button, Typography} from '@mui/material';
 
 const columns = [
   {field: 'id', headerName: 'ID', flex: 1},
@@ -11,6 +11,15 @@ const columns = [
     field: 'value',
     headerName: 'Valor',
     flex: 1,
+  },
+  {
+    field: "click",
+    headerName: "Click",
+    width: 90,
+    renderCell: (params) => {
+       // you will find row info in params
+       return (<Button onClick={() => alert(params.id)}>Click</Button>);
+    }
   },
 ];
 

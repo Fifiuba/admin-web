@@ -54,7 +54,7 @@ export default function DriverProfile({driver, role, title}) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button sx={{border: '2px', borderColor:'#ffe800', color:'#ffe800'}} onClick={handleClickOpen}>
         <InfoOutlinedIcon/>
       </Button>
       <Dialog
