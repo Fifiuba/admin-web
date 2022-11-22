@@ -13,6 +13,7 @@ import Metrics from './views/metrics.js';
 import AdminsAdministration from './views/adminsAdministration.js';
 import JourneysAdministration from './views/journeysAdministration.js';
 import Transactions from './views/transactions.js';
+import Services from './views/services.js';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
           <Route path="viajes" element={<JourneysAdministration/>} />
           <Route path="metricas" element={<Metrics/>} />
           <Route path="transacciones" element={<Transactions/>} />
+          <Route path="servicios" element={<Services/>} />
         </Route>
       </Routes>
     </BrowserRouter>

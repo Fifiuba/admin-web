@@ -16,6 +16,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {Container} from '@mui/material';
 import DriverProfile from '../components/driverProfile';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import BlockIcon from '@mui/icons-material/Block';
 
 const fields = [
   {id: 'id', name: 'ID'},
@@ -37,6 +39,7 @@ const columns = [
   {id: 'age', label: 'Edad', minWidth: 50},
   {id: 'info', label: 'Ver', align: 'center'},
   {id: 'delete', label: 'Eliminar', align: 'center'},
+  {id: 'block', label: 'Bloqueo', align: 'center'},
 ];
 
 let rows = [];
@@ -172,7 +175,7 @@ export default function DriversAdministration() {
                                     onClick={() =>
                                       handleDeleteUser(row.id, 'driver')}/>
                                 </TableCell>);
-                            } else {
+                            } else if (column.id == 'info') {
                               return (
                                 <TableCell key={column.id} align="center">
                                   <DriverProfile
@@ -180,6 +183,13 @@ export default function DriversAdministration() {
                                     role="driver"
                                     title="Conductor"/>
                                 </TableCell>);
+                            } else {
+                              console.log(row, row.isBlock, row.isBlock == true);
+                              if (row.isBlock == 'true') {
+                                return (<LockOpenIcon sx={{color:'red'}}/>);
+                              } else {
+                                return (<BlockIcon/>);
+                              }
                             }
                           })}
                         </TableRow>
