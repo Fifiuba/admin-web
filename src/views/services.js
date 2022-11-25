@@ -4,6 +4,7 @@ import {Container} from '@mui/system';
 import {Typography} from '@mui/material';
 import getServices from '../services/getServices';
 import CircularProgress from '@mui/material/CircularProgress';
+import datagridStyle from '../utils/datagridStyles';
 
 const columns = [
   {field: 'name', headerName: 'Servicio', flex: 1},
@@ -14,7 +15,6 @@ const columns = [
 const rows = [];
 
 export default function Services() {
-
   const [services, setServices] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -23,19 +23,19 @@ export default function Services() {
       if (res.status == 200 || res.status == 202) {
         let id = 0;
         for (const [key, value] of Object.entries(res.data)) {
-            rows.push({
-                id: id,
-                name: key,
-                description: value.description,
-                createdOn: value.created_on,
-            });
-            id = id + 1;
-        }   
+          rows.push({
+            id: id,
+            name: key,
+            description: value.description,
+            createdOn: value.created_on,
+          });
+          id = id + 1;
+        }
         setServices(rows);
         setLoading(false);
-        }
+      }
     });
-  }, []); 
+  }, []);
 
   if (loading) {
     return <Container
@@ -63,26 +63,7 @@ export default function Services() {
           columns={columns}
           pageSize={15}
           rowsPerPageOptions={[15]}
-          sx={{
-            'borderColor': '#1e85c1',
-            'height': '700px',
-            '& .MuiDataGrid-columnHeaders':
-                    {color: '#000',
-                      backgroundColor: '#1e85c1',
-                      opacity: '0.8'},
-            '& .MuiDataGrid-row':
-                    {color: '#000',
-                      backgroundColor: '#fff',
-                      fontWeight: 750,
-                    },
-            '& .MuiDataGrid-columnHeaderTitle':
-                    {fontWeight: 950},
-            '& .MuiDataGrid-cell':
-                    {borderColor: '#1e85c1'},
-            '& .MuiDataGrid-columnHeaderTitleContainer':
-                    {borderColor: '#fff'},
-
-          }}
+          sx={datagridStyle}
         />
       </div>
     </Container>

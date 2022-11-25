@@ -2,6 +2,7 @@ import * as React from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import {Container} from '@mui/system';
 import {Typography} from '@mui/material';
+import datagridStyle from '../utils/datagridStyles';
 
 const columns = [
   {field: 'id', headerName: 'ID', flex: 1},
@@ -60,26 +61,7 @@ export default function Transactions() {
           columns={columns}
           pageSize={15}
           rowsPerPageOptions={[15]}
-          sx={{
-            'borderColor': '#1e85c1',
-            'height': '700px',
-            '& .MuiDataGrid-columnHeaders':
-                    {color: '#000',
-                      backgroundColor: '#1e85c1',
-                      opacity: '0.8'},
-            '& .MuiDataGrid-row':
-                    {color: '#000',
-                      backgroundColor: '#fff',
-                      fontWeight: 750,
-                    },
-            '& .MuiDataGrid-columnHeaderTitle':
-                    {fontWeight: 950},
-            '& .MuiDataGrid-cell':
-                    {borderColor: '#1e85c1'},
-            '& .MuiDataGrid-columnHeaderTitleContainer':
-                    {borderColor: '#fff'},
-
-          }}
+          sx={datagridStyle}
         />
       </div>
     </Container>

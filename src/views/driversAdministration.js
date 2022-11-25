@@ -1,46 +1,18 @@
-import {Box} from '@mui/system';
 import React, {useEffect} from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, {tableCellClasses} from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import {styled} from '@mui/material/styles';
-import SearchBar from '../components/searchBar';
 import getUsersByRole from '../services/getUsersByRole';
 import deleteUser from '../services/deleteUser';
 import CircularProgress from '@mui/material/CircularProgress';
 import {Container} from '@mui/material';
 import DriverProfile from '../components/driverProfile';
 import DeleteIcon from '@mui/icons-material/Delete';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import BlockIcon from '@mui/icons-material/Block';
-
-const fields = [
-  {id: 'id', name: 'ID'},
-  {id: 'name', name: 'Nombre'},
-  {id: 'email', name: 'Correo electrónico'},
-  {id: 'phone', name: 'Teléfono'},
-  {id: 'age', name: 'Edad'},
-];
-
-const columns = [
-  {id: 'id', label: 'ID', minWidth: 50},
-  {id: 'name', label: 'Nombre', minWidth: 50},
-  {
-    id: 'email',
-    label: 'Correo electrónico',
-    minWidth: 100,
-  },
-  {id: 'phone_number', label: 'Teléfono', minWidth: 50},
-  {id: 'age', label: 'Edad', minWidth: 50},
-  {id: 'info', label: 'Ver', align: 'center'},
-  {id: 'delete', label: 'Eliminar', align: 'center'},
-  {id: 'block', label: 'Bloqueo', align: 'center'},
-];
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import {DataGrid} from '@mui/x-data-grid';
+import {Typography} from '@mui/material';
+import datagridStyles from '../utils/datagridStyles';
+import blockUser from '../services/blockUser';
 
 let rows = [];
 
@@ -48,8 +20,6 @@ export default function DriversAdministration() {
   const [drivers, setDrivers] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [deleting, setDeleting] = React.useState(false);
-  const [by, setBy] = React.useState('name');
-  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
@@ -73,32 +43,8 @@ export default function DriversAdministration() {
     </Container>;
   }
 
-  const handleSearch = (value) => {
-    if (value !== '') {
-      let aux = rows;
-      aux = aux.filter((driver) => {
-        if (typeof driver[by] != 'number') {
-          return driver[by].toLowerCase().includes(value.toLowerCase());
-        } else {
-          return (driver[by] == value);
-        }
-      });
-      setDrivers(aux);
-    } else setDrivers(rows);
-  };
-
-  const handleSearchBy = (value) => {
-    setDrivers(rows);
-    setBy(value);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+    setRowsPerPage(event);
   };
 
   const handleDeleteUser = (id) => {
@@ -110,105 +56,73 @@ export default function DriversAdministration() {
     });
   };
 
-  const StyledTableCell = styled(TableCell)(({theme}) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#1976d2',
-      color: theme.palette.common.white,
-      fontWeight: 900,
+  const handleBlockUser = (id, blocked) => {
+    blockUser(id, blocked).then((res) => {
+      if (res.status == 200) {
+        setLoading(true);
+        setDeleting(!deleting);
+      }
+    });
+  };
+
+  const columns = [
+    {field: 'id', headerName: 'ID', flex: 1},
+    {field: 'name', headerName: 'Nombre', flex: 1},
+    {field: 'email', headerName: 'Correo electrónico', flex: 1},
+    {field: 'phone_number', headerName: 'Teléfono'},
+    {field: 'age', headerName: 'Edad'},
+    {
+      field: 'actions',
+      headerName: '',
+      flex: 1,
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+        return (
+          <Box sx={{display: 'flex'}}>
+            <DriverProfile
+              driver={params.row}
+              role='driver'
+              title='Conductor'
+            />
+            <Button sx={{borderColor: 'red', color: 'red'}}>
+              <DeleteIcon
+                onClick={() => handleDeleteUser(params.id, 'driver')}
+              />
+            </Button>
+            <Button sx={{borderColor: '#fff', color: 'red'}}>
+              {params.row.isBlock ?
+                <LockOpenIcon
+                  onClick={() => handleBlockUser(params.id, false)}
+                /> :
+                <BlockIcon onClick={() => handleBlockUser(params.id, true)}/>
+              }
+            </Button>
+          </Box>
+        );
+      },
     },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+  ];
 
   return (
-    <Box sx={{padding: '1em'}}>
-      <Box sx={{display: 'flex', justifyContent: 'center', padding: '1em'}}>
-        <SearchBar
-          onSearch={handleSearch}
-          fields={fields}
-          onSearchBy={handleSearchBy}
-          by={by}
+    <Container sx={{pt: '2rem'}}>
+      <div style={{height: 400, width: '100%'}}>
+        <Typography
+          sx={{color: '#E1E2E1', pb: '.5em'}}
+          variant="h4"
+          component="div"
+        >
+        Conductores
+        </Typography>
+        <DataGrid
+          rows={drivers}
+          columns={columns}
+          pageSize={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 15, 50, 100]}
+          onPageSizeChange={handleChangeRowsPerPage}
+          sx={datagridStyles}
         />
-      </Box>
-      <Box sx={{display: 'flex', justifyContent: 'center'}}>
-        <Paper sx={{width: '100%', overflow: 'hidden'}}>
-          <TableContainer sx={{maxHeight: 440}}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <StyledTableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{minWidth: column.minWidth}}
-                    >
-                      {column.label}
-                    </StyledTableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {drivers
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row.code}>
-                          {columns.map((column) => {
-                            const value = row[column.id];
-                            if (column.id != 'info' && column.id != 'delete') {
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number' ?
-                                  column.format(value) :
-                                  value}
-                                </TableCell>
-                              );
-                            } else if (column.id == 'delete') {
-                              return (
-                                <TableCell key={column.id} align="center">
-                                  <DeleteIcon
-                                    onClick={() =>
-                                      handleDeleteUser(row.id, 'driver')}/>
-                                </TableCell>);
-                            } else if (column.id == 'info') {
-                              return (
-                                <TableCell key={column.id} align="center">
-                                  <DriverProfile
-                                    driver={row}
-                                    role="driver"
-                                    title="Conductor"/>
-                                </TableCell>);
-                            } else {
-                              console.log(row, row.isBlock, row.isBlock == true);
-                              if (row.isBlock == 'true') {
-                                return (<LockOpenIcon sx={{color:'red'}}/>);
-                              } else {
-                                return (<BlockIcon/>);
-                              }
-                            }
-                          })}
-                        </TableRow>
-                      );
-                    })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
-      </Box>
-    </Box>
+      </div>
+    </Container>
   );
 }

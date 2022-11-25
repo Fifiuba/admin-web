@@ -21,15 +21,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function UserProfile({user, role, title}) {
+  console.log(user);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = React.useState(true);
   const [info, setInfo] = React.useState({});
-  console.log(user);
   useEffect(() => {
     if (open) {
       getUserByIdRole(user.id, role).then((res) => {
         if (res.status == 200 || res.status == 202) {
-          console.log(res.data);
           setLoading(false);
           setInfo(res.data);
         }
