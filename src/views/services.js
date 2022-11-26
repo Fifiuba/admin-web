@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import {Container} from '@mui/system';
-import {Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import getServices from '../services/getServices';
 import CircularProgress from '@mui/material/CircularProgress';
 import datagridStyle from '../utils/datagridStyles';
@@ -10,6 +10,31 @@ const columns = [
   {field: 'name', headerName: 'Servicio', flex: 1},
   {field: 'description', headerName: 'Descripción', flex: 1},
   {field: 'createdOn', headerName: 'Creado', flex: 1},
+  {
+    field: 'actions',
+    headerName: 'Estado',
+    flex: 1,
+    sortable: false,
+    disableColumnMenu: true,
+    renderCell: (params) => {
+      return (
+        <Box sx={{display: 'flex', flexWrap: 'nowrap'}}>
+          <Box
+            sx={{
+              display: 'flex',
+              height: '1em',
+              width: '3em',
+              backgroundColor: ((!params.row.status) ? '#34b233':'#ed4337'),
+              mr: '.5em',
+            }}
+          />
+          <Box>
+            {((params.row.status) ? params.row.status : 'OK')}
+          </Box>
+        </Box>
+      );
+    },
+  },
 ];
 
 const rows = [];
