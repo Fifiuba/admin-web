@@ -53,11 +53,11 @@ export default function Home({admin}) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container sx={{py: 8, justifyContent: 'center'}}>
+      <Container sx={{py: 8}}>
         <Grid container spacing={1}>
           {tiles.map((tile, idx) => {
             return (
-              <Grid key={idx} item>
+              <Grid key={idx} item xs={12} sm={4} md={2}>
                 <Tile
                   path={redirects[idx]}
                   title={tile}

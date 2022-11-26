@@ -15,7 +15,7 @@ function aux(id, blocked) {
     return;
   }
   return axios
-      .patch('https://backend-agustinaa235.cloud.okteto.net/users/block/' +
+      .patch('https://api-gateway-solfonte.cloud.okteto.net/users/block/' +
         id,
       {block: blocked},
       {headers: {Authorization: `Bearer ${token}`}});

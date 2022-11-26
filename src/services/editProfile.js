@@ -21,7 +21,7 @@ function editAdmin(admin) {
   };
 
   return axios
-      .patch('https://backend-alejovillores.cloud.okteto.net/admins/me/',
+      .patch('https://api-gateway-solfonte.cloud.okteto.net/admins/me/',
           {'name': admin.name,
             'last_name': admin.last_name}
           , config);

@@ -3,7 +3,12 @@ import axios from 'axios';
 export default async function signupAdmin(newAdmin) {
   try {
     const res = await addAdmin(newAdmin);
-    if (res.status == 201) return true;
+    if (
+      res.status == 201 ||
+      res.status == 200 ||
+      res.status == 204) {
+      return true;
+    }
     return false;
   } catch (e) {
     return false;
@@ -21,7 +26,7 @@ function addAdmin(newAdmin) {
   };
 
   return axios
-      .post('https://backend-alejovillores.cloud.okteto.net/admins',
+      .post('https://api-gateway-solfonte.cloud.okteto.net/admins',
           {'name': newAdmin.name,
             'last_name': newAdmin.last_name,
             'email': newAdmin.email,

@@ -14,8 +14,7 @@ export default function Tile({title, icon, path}) {
       onClick={() => navigate(path)}
       variant="outlined"
       sx={{
-        width: '200px',
-        height: '200px',
+        minHeight: '200px',
         flexDirection: 'column',
         borderColor: '#1e85c1',
       }}

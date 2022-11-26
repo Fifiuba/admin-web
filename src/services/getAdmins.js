@@ -8,7 +8,7 @@ export default async function getAdmins() {
       return;
     }
     return axios
-        .get('https://backend-alejovillores.cloud.okteto.net/admins/',
+        .get('https://api-gateway-solfonte.cloud.okteto.net/admins/',
             {headers: {Authorization: `Bearer ${token}`}});
   } catch (e) {
     return false;

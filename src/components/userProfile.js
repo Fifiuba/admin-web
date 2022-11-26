@@ -21,7 +21,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function UserProfile({user, role, title}) {
-  console.log(user);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = React.useState(true);
   const [info, setInfo] = React.useState({});

@@ -25,3 +25,7 @@ code {
   opacity: 0.7;
   outline-color: '#e1e2e3';
 }
+
+.logo-img {
+  height: 5em;
+}

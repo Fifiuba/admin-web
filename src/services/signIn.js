@@ -43,5 +43,5 @@ async function authFirebase(admin) {
 }
 
 export function authAdmin(token) {
-  return axios.post('https://backend-alejovillores.cloud.okteto.net/admins/login', {'token': token});
+  return axios.post('https://api-gateway-solfonte.cloud.okteto.net/admins/login', {'token': token});
 }

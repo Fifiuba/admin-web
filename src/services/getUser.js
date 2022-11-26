@@ -11,6 +11,6 @@ export default async function getUserByIdRole(id, role) {
 
 function getUsers(id, role) {
   return axios
-      .get('https://backend-agustinaa235.cloud.okteto.net/users/' + id,
+      .get('https://api-gateway-solfonte.cloud.okteto.net/users/' + id,
           {params: {user_type: role}});
 }

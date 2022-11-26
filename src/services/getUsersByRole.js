@@ -15,7 +15,7 @@ function getUsers(role) {
     return;
   }
   return axios
-      .get('https://backend-agustinaa235.cloud.okteto.net/users',
+      .get('https://api-gateway-solfonte.cloud.okteto.net/users',
           {params: {user_type: role},
             headers: {Authorization: `Bearer ${token}`}});
 }
