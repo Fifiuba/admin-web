@@ -23,8 +23,8 @@ const embebedQueryValue = [
 
 const embebedTopList = [
   <iframe key='1' src="https://app.datadoghq.com/graph/embed?token=61e193d866c3dead79745eaa2e67a827b414b9147fe45523f48ea5f66cd79b5c&height=200&width=400&legend=true" width="400" height="200" frameBorder="0"></iframe>,
-  <iframe key='2' src="https://app.datadoghq.com/graph/embed?token=61e193d866c3dead79745eaa2e67a827b414b9147fe45523f48ea5f66cd79b5c&height=200&width=400&legend=true" width="400" height="200" frameBorder="0"></iframe>,
-  <iframe key='3' src="https://app.datadoghq.com/graph/embed?token=61e193d866c3dead79745eaa2e67a827b414b9147fe45523f48ea5f66cd79b5c&height=200&width=400&legend=true" width="400" height="200" frameBorder="0"></iframe>,
+  <iframe key='2' src="https://app.datadoghq.com/graph/embed?token=b65614e3780d6b191cf4c67ceae1af57a66464c29bc8cfcb0b0202acbeda1fe4&height=200&width=400&legend=true" width="400" height="200" frameBorder="0"></iframe>,
+  <iframe key='3' src="https://app.datadoghq.com/graph/embed?token=29a1d677d04c8f7c45ae33f1a106992fbb45902a04d605cdf9e66d40c7eef744&height=200&width=400&legend=true" width="400" height="200" frameBorder="0"></iframe>,
   <iframe key='4' src="https://app.datadoghq.com/graph/embed?token=61e193d866c3dead79745eaa2e67a827b414b9147fe45523f48ea5f66cd79b5c&height=200&width=400&legend=true" width="400" height="200" frameBorder="0"></iframe>,
 ];
 
