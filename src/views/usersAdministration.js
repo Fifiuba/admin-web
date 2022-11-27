@@ -13,6 +13,7 @@ import {Typography} from '@mui/material';
 import BlockIcon from '@mui/icons-material/Block';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import datagridStyles from '../utils/datagridStyles';
+import ConfirmationDialog from '../components/confirmationDialog';
 
 let rows = [];
 
@@ -85,19 +86,44 @@ export default function UsersAdministration() {
               role='passenger'
               title='Pasajero'
             />
-            <Button sx={{borderColor: 'red', color: 'red'}}>
-              <DeleteIcon
-                onClick={() => handleDeleteUser(params.id, 'driver')}
-              />
-            </Button>
-            <Button sx={{borderColor: '#fff', color: 'red'}}>
-              {params.row.isBlock ?
-                <LockOpenIcon
-                  onClick={() => handleBlockUser(params.id, false)}/
-                > :
-                <BlockIcon onClick={() => handleBlockUser(params.id, true)}/>
+            <ConfirmationDialog
+              button={
+                <Button sx={{borderColor: 'red', color: 'red'}}>
+                  <DeleteIcon/>
+                </Button>
               }
-            </Button>
+              id={params.row.id}
+              action='Eliminar usuario'
+              param='passenger'
+              message={
+                '¿Esta seguro que desea eliminar al usuario ' +
+                params.row.name + '?'
+              }
+              title='Eliminar usuario'
+              onConfirm={handleDeleteUser}
+            />
+            <ConfirmationDialog
+              button={
+                <Button sx={{borderColor: '#fff', color: 'red'}}>
+                  {params.row.isBlock ?
+                    <LockOpenIcon/> : <BlockIcon/>
+                  }
+                </Button>
+              }
+              id={params.row.id}
+              action={
+                params.row.isBlock ? 'Desbloquear': ' Bloquear'
+              }
+              param={params.row.isBlock ? false : true}
+              message={
+                '¿Esta seguro que desea bloquear/desbloquear al usuario ' +
+                params.row.name + '?'
+              }
+              title={
+                params.row.isBlock ? 'Desbloquear usuario': ' Bloquear usuario'
+              }
+              onConfirm={handleBlockUser}
+            />
           </Box>
         );
       },
