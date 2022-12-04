@@ -16,11 +16,8 @@ export default async function signupAdmin(newAdmin) {
 }
 
 function addAdmin(newAdmin) {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('NO TOKEN');
-    return;
-  }
+  let token = localStorage.getItem('token');
+  if (!token) token = sessionStorage.getItem('token');
   const config = {
     headers: {Authorization: `Bearer ${token}`},
   };

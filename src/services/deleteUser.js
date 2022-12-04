@@ -9,11 +9,8 @@ export default async function deleteUser(id, role) {
 }
 
 function deleteUserById(id, role) {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('NO TOKEN');
-    return;
-  }
+  let token = localStorage.getItem('token');
+  if (!token) token = sessionStorage.getItem('token');
   return axios
       .delete('https://backend-agustinaa235.cloud.okteto.net/users/' + id,
           {data: {user_type: role},

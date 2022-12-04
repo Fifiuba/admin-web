@@ -9,11 +9,8 @@ export default async function getJourneys() {
 }
 
 function aux() {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('NO TOKEN');
-    return;
-  }
+  let token = localStorage.getItem('token');
+  if (!token) token = sessionStorage.getItem('token');
   return axios
       .get('https://journey-service-solfonte.cloud.okteto.net/journey',
           {headers: {Authorization: `Bearer ${token}`}});

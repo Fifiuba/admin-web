@@ -9,11 +9,8 @@ export default async function getUsersByRole(role) {
 }
 
 function getUsers(role) {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('NO TOKEN');
-    return;
-  }
+  let token = localStorage.getItem('token');
+  if (!token) token = sessionStorage.getItem('token');
   return axios
       .get('https://api-gateway-solfonte.cloud.okteto.net/users',
           {params: {user_type: role},

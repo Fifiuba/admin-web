@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Button} from '@mui/material';
 
-export default function NavMenu({handleLogout, admin}) {
+export default function NavMenu({handleLogout}) {
   return (
     <Box component="div" sx={{display: 'flex'}}>
       <Button

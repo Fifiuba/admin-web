@@ -15,6 +15,7 @@ import JourneysAdministration from './views/journeysAdministration.js';
 import Transactions from './views/transactions.js';
 import Services from './views/services.js';
 
+export const AdminContext = React.createContext();
 
 function App() {
   const [admin, setAdmin] = useState(null);
@@ -33,40 +34,41 @@ function App() {
     }
   };
 
-  const handleLogout = (admin) => {
-    if (!admin['stayLogged']) localStorage.removeItem('token');
+  const handleLogout = () => {
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     setAdmin(null);
   };
 
   return (
 
     <BrowserRouter>
-      <NavBar admin={admin} handleLogout={handleLogout}/>
-      <Routes>
-        <Route
-          index
-          element={<SignIn handleLogin={handleLogin}
-            admin={admin}
-            signUpError={signUpError}/>}/>
-        <Route path="ingresar"
-          element={<SignIn
-            handleLogin={handleLogin}
-            admin={admin}
-            signUpError={signUpError}/>}
-        />
-        <Route path="registrar" element={<SignUp admin={admin}/>} />
-        <Route element={<ProtectedRoute admin={admin}/>}>
-          <Route path="inicio" element={<Home admin={admin}/>} />
-          <Route path="perfil" element={<Profile admin={admin}/>} />
-          <Route path="usuarios" element={<UsersAdministration/>} />
-          <Route path="choferes" element={<DriversAdministration/>} />
-          <Route path="admins" element={<AdminsAdministration/>} />
-          <Route path="viajes" element={<JourneysAdministration/>} />
-          <Route path="metricas" element={<Metrics/>} />
-          <Route path="transacciones" element={<Transactions/>} />
-          <Route path="servicios" element={<Services/>} />
-        </Route>
-      </Routes>
+      <AdminContext.Provider value={[admin, setAdmin]}>
+        <NavBar handleLogout={handleLogout}/>
+        <Routes>
+          <Route
+            index
+            element={<SignIn handleLogin={handleLogin}
+              signUpError={signUpError}/>}/>
+          <Route path="ingresar"
+            element={<SignIn
+              handleLogin={handleLogin}
+              signUpError={signUpError}/>}
+          />
+          <Route element={<ProtectedRoute/>}>
+            <Route path="registrar" element={<SignUp/>} />
+            <Route path="inicio" element={<Home/>} />
+            <Route path="perfil" element={<Profile/>} />
+            <Route path="usuarios" element={<UsersAdministration/>} />
+            <Route path="choferes" element={<DriversAdministration/>} />
+            <Route path="admins" element={<AdminsAdministration/>} />
+            <Route path="viajes" element={<JourneysAdministration/>} />
+            <Route path="metricas" element={<Metrics/>} />
+            <Route path="transacciones" element={<Transactions/>} />
+            <Route path="servicios" element={<Services/>} />
+          </Route>
+        </Routes>
+      </AdminContext.Provider>
     </BrowserRouter>
   );
 }

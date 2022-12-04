@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "eslint": "^8.23.1",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "jsdoc": "^4.0.0"
   }
 }

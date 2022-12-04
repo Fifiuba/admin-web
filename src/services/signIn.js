@@ -22,7 +22,8 @@ export default async function signin(admin, stayLogged) {
   try {
     const token = await authFirebase(admin);
     const res = await authAdmin(token);
-    localStorage.setItem('token', res.data['token']);
+    if (stayLogged) localStorage.setItem('token', res.data['token']);
+    else sessionStorage.setItem('token', res.data['token']);
     return {
       name: res.data.name,
       last_name: res.data.last_name,

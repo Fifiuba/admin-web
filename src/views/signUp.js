@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Navigate} from 'react-router-dom';
 import ValidationField from '../components/validationField';
 import validate from '../utils/validation';
 import signupAdmin from '../services/signUp';
@@ -13,9 +12,7 @@ import {Alert} from '@mui/material';
 
 const theme = createTheme();
 
-export default function SignUp({admin}) {
-  if (!admin) return <Navigate to="/ingresar"/>;
-
+export default function SignUp() {
   const [showError, setShowError] = useState(false);
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');

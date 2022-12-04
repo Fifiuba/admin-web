@@ -6,23 +6,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Navigate} from 'react-router-dom';
 import ValidationField from '../components/validationField';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {blue} from '@mui/material/colors';
 import validate from '../utils/validation';
 import editProfile from '../services/editProfile';
 import {Alert} from '@mui/material';
-
+import {AdminContext} from '../App';
 const theme = createTheme();
 
-export default function Profile({admin}) {
-  if (!admin) return <Navigate to="/ingresar"/>;
-
+export default function Profile() {
+  const admin = React.useContext(AdminContext);
+  console.log('ADMIN', admin[0]);
   const [edit, setEdit] = useState(false);
-  const [name, setName] = useState(admin.name);
-  const [lastname, setLastname] = useState(admin.last_name);
-  const [email, setEmail] = useState(admin.email);
+  const [name, setName] = useState(admin[0].name);
+  const [lastname, setLastname] = useState(admin[0].last_name);
+  const [email, setEmail] = useState(admin[0].email);
   const [editError, setEditError] = useState(false);
   const [editSuccess, setEditSuccess] = useState(false);
 
@@ -34,7 +33,7 @@ export default function Profile({admin}) {
       const success = await editProfile({
         'name': name,
         'last_name': lastname,
-        'email': admin.email,
+        'email': admin[0].email,
       });
       if (!success) {
         setEditError(true);
@@ -42,6 +41,12 @@ export default function Profile({admin}) {
           setEditError(false);
         }, 3000);
       } else {
+        admin[1]({
+          name: name,
+          last_name: lastname,
+          email: admin[0].email,
+          stayLogged: admin[0].stayLogged,
+        });
         setEditSuccess(true);
         setEdit(false);
         setTimeout(() => {
@@ -63,10 +68,10 @@ export default function Profile({admin}) {
 
   const handleCancel = () => {
     setEdit(!edit);
-    setName(admin.name);
-    setLastname(admin.last_name);
-    setEmail(admin.email);
-    setPassword(admin.password);
+    setName(admin[0].name);
+    setLastname(admin[0].last_name);
+    setEmail(admin[0].email);
+    setPassword(admin[0].password);
   };
 
   return (

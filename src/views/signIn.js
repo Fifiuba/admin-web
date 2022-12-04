@@ -11,11 +11,26 @@ import validate from '../utils/validation';
 import {Navigate} from 'react-router-dom';
 import {Alert, FormControlLabel, FormGroup} from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
+import {AdminContext} from '../App';
+import getAdmin from '../services/getAdmin';
 
 const theme = createTheme();
 
-export default function SignIn({handleLogin, admin, signUpError}) {
-  if (admin) return <Navigate to="/inicio"/>;
+export default function SignIn({handleLogin, signUpError}) {
+  const admin = React.useContext(AdminContext);
+  let token = localStorage.getItem('token');
+  if (!token) token = sessionStorage.getItem('token');
+  if (token) {
+    getAdmin(token).then((res) => {
+      if (res.status != 200) {
+        return <Navigate to='/'/>;
+      } else {
+        admin[1](res.data);
+      }
+    });
+  }
+  console.log('SEGUI DE LARGO');
+  if (admin[0]) return <Navigate to="/inicio"/>;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('Entrada Inválida!');

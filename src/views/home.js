@@ -49,7 +49,7 @@ const icons = [
 
 const theme = createTheme();
 
-export default function Home({admin}) {
+export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -9,11 +9,8 @@ export default async function blockUser(id, blocked) {
 }
 
 function aux(id, blocked) {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('NO TOKEN');
-    return;
-  }
+  let token = localStorage.getItem('token');
+  if (!token) token = sessionStorage.getItem('token');
   return axios
       .patch('https://api-gateway-solfonte.cloud.okteto.net/users/block/' +
         id,

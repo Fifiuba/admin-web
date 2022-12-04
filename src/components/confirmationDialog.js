@@ -1,18 +1,30 @@
 import * as React from 'react';
+import {Box} from '@mui/system';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import {Box} from '@mui/system';
+
+/**
+ * Show a pop-up to confirm an action and execute it
+ * @param {string} message Message displayed
+ * @param {function} onConfirm Callback in case of confirm action
+ * @param {number} id User id (callback param)
+ * @param {(string|boolean)} param Callback param that especifies
+ * roles like driver/passenger or block/unblock
+ * @param {string} action Action name
+ * @param {Object} button Action button
+ * @param {string} title Title of pop-up
+*/
 
 export default function ConfirmationDialog({
   message,
   onConfirm,
-  action,
   id,
   param,
+  action,
   button,
   title,
 }) {
