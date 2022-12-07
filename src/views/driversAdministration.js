@@ -15,20 +15,16 @@ import datagridStyles from '../utils/datagridStyles';
 import blockUser from '../services/blockUser';
 import ConfirmationDialog from '../components/confirmationDialog';
 
-let rows = [];
-
 export default function DriversAdministration() {
   const [drivers, setDrivers] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [deleting, setDeleting] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   useEffect(() => {
     getUsersByRole('driver').then((res) => {
       if (res.status == 200 || res.status == 202) {
-        rows = res.data;
         setLoading(false);
-        setDrivers(rows);
+        setDrivers(res.data);
       }
     });
   }, [deleting]);

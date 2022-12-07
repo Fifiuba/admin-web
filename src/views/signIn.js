@@ -29,7 +29,6 @@ export default function SignIn({handleLogin, signUpError}) {
       }
     });
   }
-  console.log('SEGUI DE LARGO');
   if (admin[0]) return <Navigate to="/inicio"/>;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

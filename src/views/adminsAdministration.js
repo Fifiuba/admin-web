@@ -6,19 +6,15 @@ import {DataGrid} from '@mui/x-data-grid';
 import {Typography} from '@mui/material';
 import datagridStyles from '../utils/datagridStyles';
 
-let rows = [];
-
 export default function AdminsAdministration() {
   const [admins, setAdmins] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
   useEffect(() => {
     getAdmins().then((res) => {
       if (res.status == 200 || res.status == 202) {
-        rows = res.data;
         setLoading(false);
-        setAdmins(rows);
+        setAdmins(res.data);
       }
     });
   }, []);

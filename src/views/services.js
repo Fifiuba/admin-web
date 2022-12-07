@@ -7,13 +7,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 import datagridStyle from '../utils/datagridStyles';
 
 const columns = [
-  {field: 'name', headerName: 'Servicio', flex: 1},
+  {field: 'name', headerName: 'Servicio', flex: 0.2},
   {field: 'description', headerName: 'Descripción', flex: 1},
-  {field: 'createdOn', headerName: 'Creado', flex: 1},
+  {field: 'createdOn', headerName: 'Creado', flex: 0.2},
   {
     field: 'actions',
     headerName: 'Estado',
-    flex: 1,
+    flex: 0.2,
     sortable: false,
     disableColumnMenu: true,
     renderCell: (params) => {
@@ -37,9 +37,8 @@ const columns = [
   },
 ];
 
-const rows = [];
-
 export default function Services() {
+  const rows = [];
   const [services, setServices] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -53,6 +52,7 @@ export default function Services() {
             name: key,
             description: value.description,
             createdOn: value.created_on,
+            status: value.status,
           });
           id = id + 1;
         }

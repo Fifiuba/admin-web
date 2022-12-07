@@ -44,7 +44,15 @@ Las funcionalidades implementadas hasta el momento son:
 - Login.
 - Visualización y edición de perfil.
 - Registrar otro administrador.
+- Visualizar administradores.
 - Visualizar perfil de usuarios de la aplicación.
+- Bloqueo/Desbloqueo de usuarios.
+- Eliminación de usuarios.
+- Visualización de viajes.
+- Visualización de métricas.
+- Visualización de transacciones.
+- Visualización del estado de los servicios.
+- Mantenimiento de la sesión.
 
 ## Credenciales
 ---

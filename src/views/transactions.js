@@ -1,51 +1,50 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import {Container} from '@mui/system';
 import {Typography} from '@mui/material';
 import datagridStyle from '../utils/datagridStyles';
+import CircularProgress from '@mui/material/CircularProgress';
+import getTransactions from '../services/getTransactions';
 
 const columns = [
-  {field: 'id', headerName: 'ID', flex: 1},
+  {field: '_id', headerName: 'ID', flex: 1},
+  {field: 'tx', headerName: 'Transacción', flex: 1},
   {field: 'from', headerName: 'Origen', flex: 1},
   {field: 'to', headerName: 'Destino', flex: 1},
-  {
-    field: 'value',
-    headerName: 'Valor',
-    flex: 1,
-  },
+  {field: 'amount', headerName: 'Valor', flex: 1},
 ];
 
-const rows = [
-  {id: '1', from: '1', to: '2', value: 35},
-  {id: '2', from: '2', to: '3', value: 42},
-  {id: '3', from: '2', to: '7', value: 45},
-  {id: '4', from: '3', to: '1', value: 16},
-  {id: '5', from: '4', to: '8', value: 22},
-  {id: '6', from: '5', to: '3', value: 150},
-  {id: '7', from: '6', to: '4', value: 44},
-  {id: '8', from: '7', to: '2', value: 36},
-  {id: '9', from: '8', to: '5', value: 65},
-  {id: '1', from: '1', to: '2', value: 35},
-  {id: '2', from: '2', to: '3', value: 42},
-  {id: '3', from: '2', to: '7', value: 45},
-  {id: '4', from: '3', to: '1', value: 16},
-  {id: '5', from: '4', to: '8', value: 2},
-  {id: '6', from: '5', to: '3', value: 150},
-  {id: '7', from: '6', to: '4', value: 44},
-  {id: '8', from: '7', to: '2', value: 36},
-  {id: '9', from: '8', to: '5', value: 65},
-  {id: '1', from: '1', to: '2', value: 35},
-  {id: '2', from: '2', to: '3', value: 42},
-  {id: '3', from: '2', to: '7', value: 45},
-  {id: '4', from: '3', to: '1', value: 16},
-  {id: '5', from: '4', to: '8', value: 12},
-  {id: '6', from: '5', to: '3', value: 150},
-  {id: '7', from: '6', to: '4', value: 44},
-  {id: '8', from: '7', to: '2', value: 36},
-  {id: '9', from: '8', to: '5', value: 65},
-];
 
 export default function Transactions() {
+  const [txs, setTxs] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  useEffect(() => {
+    getTransactions().then((res) => {
+      if (res.status == 200 || res.status == 202) {
+        setLoading(false);
+        console.log('data', res.data);
+        setTxs(res.data);
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return <Container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: '10em'}}
+    >
+      <CircularProgress />
+    </Container>;
+  }
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(event);
+  };
+
   return (
     <Container sx={{pt: '2rem'}}>
       <div style={{height: 400, width: '100%'}}>
@@ -57,10 +56,11 @@ export default function Transactions() {
         Listado de transacciones
         </Typography>
         <DataGrid
-          rows={rows}
+          rows={txs}
           columns={columns}
-          pageSize={15}
-          rowsPerPageOptions={[15]}
+          pageSize={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 15, 50, 100]}
+          onPageSizeChange={handleChangeRowsPerPage}
           sx={datagridStyle}
         />
       </div>

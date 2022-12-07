@@ -14,10 +14,11 @@ export default function MetricPanel({metrics, checked, handler}) {
               key={idx}
               onClick={() => handler(idx)}
               sx={{
-                backgroundColor: (checked[idx] ? '#34b233':'#ed4337'),
+                backgroundColor: (checked[idx] ? '#1e85c1':'#fff'),
                 margin: '1em',
-                height: '150px',
-                width: '150px',
+                height: '100px',
+                width: '100px',
+                borderColor: (checked[idx] ? '#fff':'#1e85c1'),
               }}
             >
               <CardContent sx={{
@@ -25,8 +26,10 @@ export default function MetricPanel({metrics, checked, handler}) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textAlign: 'center',
-                height: '90px',
-                color: '#e1e2e3',
+                height: '80px',
+                position: 'relative',
+                top: '-20px',
+                color: (checked[idx] ? '#fff':'#1e85c1'),
               }}>
                 {metric}
               </CardContent>
@@ -36,7 +39,7 @@ export default function MetricPanel({metrics, checked, handler}) {
                         sx={{
                           fontSize: '16px',
                           position: 'relative',
-                          bottom: '0',
+                          bottom: '50px',
                           color: '#e1e2e3',
                           height: '20px',
                         }}/>:
@@ -44,8 +47,8 @@ export default function MetricPanel({metrics, checked, handler}) {
                         sx={{
                           fontSize: '16px',
                           position: 'relative',
-                          bottom: '0',
-                          color: '#e1e2e3',
+                          bottom: '50px',
+                          color: (checked[idx] ? '#e1e2e3':'#cb3234'),
                         }}
                       />
               }

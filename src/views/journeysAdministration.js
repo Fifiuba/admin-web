@@ -7,25 +7,21 @@ import {DataGrid} from '@mui/x-data-grid';
 import {Typography} from '@mui/material';
 import datagridStyles from '../utils/datagridStyles';
 
-let rows = [];
-
 export default function JourneysAdministration() {
   const [journeys, setJourneys] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   useEffect(() => {
     getJourneys().then((res) => {
-      // if (res.status == 200 || res.status == 202) {
-      rows = res.data;
-      getAddress(rows).then((results) => {
-        results.map((result) => {
-          result['id'] = result['_id'];
+      if (res.status == 200 || res.status == 202) {
+        getAddress(res.data).then((results) => {
+          results.map((result) => {
+            result['id'] = result['_id'];
+          });
+          setJourneys(results);
+          setLoading(false);
         });
-        setJourneys(results);
-        setLoading(false);
-      });
-      // }
+      }
     });
   }, []);
 

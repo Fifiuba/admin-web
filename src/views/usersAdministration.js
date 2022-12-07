@@ -15,20 +15,16 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import datagridStyles from '../utils/datagridStyles';
 import ConfirmationDialog from '../components/confirmationDialog';
 
-let rows = [];
-
 export default function UsersAdministration() {
   const [users, setUsers] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [deleting, setDeleting] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
   useEffect(() => {
     getUsersByRole('passenger').then((res) => {
       if (res.status == 200 || res.status == 202) {
-        rows = res.data;
         setLoading(false);
-        setUsers(rows);
+        setUsers(res.data);
       }
     });
   }, [deleting]);
