@@ -17,7 +17,6 @@ const theme = createTheme();
 
 export default function Profile() {
   const admin = React.useContext(AdminContext);
-  console.log('ADMIN', admin[0]);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(admin[0].name);
   const [lastname, setLastname] = useState(admin[0].last_name);

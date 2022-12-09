@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import getTransactions from '../services/getTransactions';
 
 const columns = [
-  {field: '_id', headerName: 'ID', flex: 1},
+  {field: 'id', headerName: 'ID', flex: 1},
   {field: 'tx', headerName: 'Transacción', flex: 1},
   {field: 'from', headerName: 'Origen', flex: 1},
   {field: 'to', headerName: 'Destino', flex: 1},
@@ -23,8 +23,11 @@ export default function Transactions() {
   useEffect(() => {
     getTransactions().then((res) => {
       if (res.status == 200 || res.status == 202) {
+        const transactions = res.data;
         setLoading(false);
-        console.log('data', res.data);
+        transactions.map((tx) => {
+          tx['id'] = tx['_id'];
+        });
         setTxs(res.data);
       }
     });

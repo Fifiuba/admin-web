@@ -24,7 +24,7 @@ const CssTextField = styled(TextField)({
 });
 
 export default function ValidationField({
-  label, value, enabled, onChange, valid, type, errMsg}) {
+  label, value, enabled, onChange, valid, type, errMsg, fixColor}) {
   const handleChange = (event) => {
     onChange(event.target.value);
   };
@@ -49,9 +49,10 @@ export default function ValidationField({
           helperText={(valid ? '' : errMsg)}
           onChange={handleChange}
           sx={{
-            '& .MuiInputBase-root': {color: '#E1E2E1'},
-            '& .MuiFormLabel-root': {color: '#003c8f'},
-            '&:hover .MuiFormLabel-root': {color: '#E1E2E1'},
+            '& .MuiInputBase-root': {color: (fixColor ? '#1e85c1':'#E1E2E1')},
+            '& .MuiFormLabel-root': {color: (fixColor ? '#1e85c1':'#003c8f')},
+            '&:hover .MuiFormLabel-root':
+              {color: (fixColor ? '#1e85c1':'#003c8f')},
           }}
         />
       </div>
