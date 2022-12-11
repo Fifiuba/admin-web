@@ -9,7 +9,7 @@ const datagridStyle = {
   '& .MuiDataGrid-row':
             {color: '#000',
               backgroundColor: '#fff',
-              fontWeight: 750,
+              fontWeight: 425,
             },
   '& .MuiDataGrid-columnHeaderTitle':
             {fontWeight: 950},

@@ -18,12 +18,16 @@ const columns = [
     disableColumnMenu: true,
     renderCell: (params) => {
       return (
-        <Box sx={{display: 'flex', flexWrap: 'nowrap'}}>
+        <Box sx={{
+          display: 'flex',
+          flexWrap: 'nowrap',
+          padding: '1em'}}>
           <Box
             sx={{
               display: 'flex',
               height: '1em',
-              width: '3em',
+              width: '1em',
+              borderRadius: '100%',
               backgroundColor: ((!params.row.status) ? '#34b233':'#ed4337'),
               mr: '.5em',
             }}
@@ -51,7 +55,7 @@ export default function Services() {
             id: id,
             name: key,
             description: value.description,
-            createdOn: value.created_on,
+            createdOn: value.created_on.replaceAll('-', '/'),
             status: value.status,
           });
           id = id + 1;
@@ -84,6 +88,7 @@ export default function Services() {
         Listado de servicios
         </Typography>
         <DataGrid
+          getRowHeight={() => 'auto'}
           rows={services}
           columns={columns}
           pageSize={15}

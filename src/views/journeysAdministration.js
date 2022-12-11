@@ -9,6 +9,7 @@ import datagridStyles from '../utils/datagridStyles';
 import ConfigJourney from '../components/configJourney';
 import getConfigJourney from '../services/getConfigJourney';
 import editConfigJourney from '../services/editConfigJourney';
+import HoverPopover from '../components/hoverPopover';
 
 export default function JourneysAdministration() {
   const [price, setPrice] = useState(0);
@@ -50,14 +51,134 @@ export default function JourneysAdministration() {
   }
 
   const columns = [
-    {field: '_id', headerName: 'ID', flex: 1},
+    {
+      field: 'id',
+      headerName: 'ID',
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row['_id'].length > 13) {
+          return (
+            <HoverPopover
+              data={params.row['_id']}
+              display={params.row['_id'].substring(0, 13) + '...'}
+            />
+          );
+        }
+        return (
+          <HoverPopover
+            data={params.row['_id']}
+            display={params.row['_id']}
+          />
+        );
+      },
+    },
     {field: 'status', headerName: 'Estado', flex: 1},
     {field: 'idPassenger', headerName: 'Pasajero'},
-    {field: 'from', headerName: 'Origen', flex: 1},
-    {field: 'to', headerName: 'Destino', flex: 1},
-    {field: 'price', headerName: 'Precio', flex: 1},
-    {field: 'startOn', headerName: 'Inicio', flex: 1},
-    {field: 'finishOn', headerName: 'Fin', flex: 1},
+    {
+      field: 'from',
+      headerName: 'Origen',
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row.from.length > 13) {
+          return (
+            <HoverPopover
+              data={params.row.from}
+              display={params.row.from.substring(0, 13) + '...'}
+            />
+          );
+        }
+        return (
+          <HoverPopover
+            data={params.row.from}
+            display={params.row.from}
+          />
+        );
+      },
+    },
+    {
+      field: 'to',
+      headerName: 'Destino',
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row.to.length > 13) {
+          return (
+            <HoverPopover
+              data={params.row.to}
+              display={params.row.to.substring(0, 13) + '...'}
+            />
+          );
+        }
+        return (
+          <HoverPopover
+            data={params.row.to}
+            display={params.row.to}
+          />
+        );
+      },
+    },
+    {
+      field: 'price',
+      headerName: 'Precio',
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row.price.length > 13) {
+          return (
+            <HoverPopover
+              data={params.row.price}
+              display={params.row.price.substring(0, 13) + '...'}
+            />
+          );
+        }
+        return (
+          <HoverPopover
+            data={params.row.price}
+            display={params.row.price}
+          />
+        );
+      },
+    },
+    {
+      field: 'startOn',
+      headerName: 'Inicio',
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row.startOn.length > 13) {
+          return (
+            <HoverPopover
+              data={params.row.startOn}
+              display={params.row.startOn.substring(0, 13) + '...'}
+            />
+          );
+        }
+        return (
+          <HoverPopover
+            data={params.row.startOn}
+            display={params.row.startOn}
+          />
+        );
+      },
+    },
+    {
+      field: 'finishOn',
+      headerName: 'Fin',
+      flex: 1,
+      renderCell: (params) => {
+        if (params.row.finishOn.length > 13) {
+          return (
+            <HoverPopover
+              data={params.row.finishOn}
+              display={params.row.finishOn.substring(0, 13) + '...'}
+            />
+          );
+        }
+        return (
+          <HoverPopover
+            data={params.row.finishOn}
+            display={params.row.finishOn}
+          />
+        );
+      },
+    },
   ];
 
   const handleChangeRowsPerPage = (event) => {

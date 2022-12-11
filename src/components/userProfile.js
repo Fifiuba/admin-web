@@ -197,7 +197,7 @@ export default function UserProfile({user, role, title}) {
               <ListItemText
                 sx={{textAlign: 'center'}}
                 primary="Calificación"
-                secondary={info.score} />
+                secondary={info.score}/>
             </ListItem>
           </TabPanel>
         </Container>

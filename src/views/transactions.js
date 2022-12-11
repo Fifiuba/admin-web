@@ -5,13 +5,114 @@ import {Typography} from '@mui/material';
 import datagridStyle from '../utils/datagridStyles';
 import CircularProgress from '@mui/material/CircularProgress';
 import getTransactions from '../services/getTransactions';
+import HoverPopover from '../components/hoverPopover';
 
 const columns = [
-  {field: 'id', headerName: 'ID', flex: 1},
-  {field: 'tx', headerName: 'Transacción', flex: 1},
-  {field: 'from', headerName: 'Origen', flex: 1},
-  {field: 'to', headerName: 'Destino', flex: 1},
-  {field: 'amount', headerName: 'Valor', flex: 1},
+  {
+    field: 'id',
+    headerName: 'ID',
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row.id.length > 19) {
+        return (
+          <HoverPopover
+            data={params.row.id}
+            display={params.row.id.substring(0, 19) + '...'}
+          />
+        );
+      }
+      return (
+        <HoverPopover
+          data={params.row.id}
+          display={params.row.id}
+        />
+      );
+    },
+  },
+  {
+    field: 'tx',
+    headerName: 'Transacción',
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row.tx.length > 19) {
+        return (
+          <HoverPopover
+            data={params.row.tx}
+            display={params.row.tx.substring(0, 19) + '...'}
+          />
+        );
+      }
+      return (
+        <HoverPopover
+          data={params.row.tx}
+          display={params.row.tx}
+        />
+      );
+    },
+  },
+  {
+    field: 'from',
+    headerName: 'Origen',
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row.from.length > 19) {
+        return (
+          <HoverPopover
+            data={params.row.from}
+            display={params.row.from.substring(0, 19) + '...'}
+          />
+        );
+      }
+      return (
+        <HoverPopover
+          data={params.row.from}
+          display={params.row.from}
+        />
+      );
+    },
+  },
+  {
+    field: 'to',
+    headerName: 'Destino',
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row.to.length > 19) {
+        return (
+          <HoverPopover
+            data={params.row.to}
+            display={params.row.to.substring(0, 19) + '...'}
+          />
+        );
+      }
+      return (
+        <HoverPopover
+          data={params.row.to}
+          display={params.row.to}
+        />
+      );
+    },
+  },
+  {
+    field: 'amount',
+    headerName: 'Valor',
+    flex: 1,
+    renderCell: (params) => {
+      if (params.row.amount.length > 19) {
+        return (
+          <HoverPopover
+            data={params.row.amount}
+            display={params.row.amount.substring(0, 19) + '...'}
+          />
+        );
+      }
+      return (
+        <HoverPopover
+          data={params.row.amount}
+          display={params.row.amount}
+        />
+      );
+    },
+  },
 ];
 
 

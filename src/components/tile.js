@@ -23,8 +23,6 @@ export default function Tile({title, icon, path}) {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          // justifyContent: 'center',
-          // alignItems: 'center'
         }}
       >
         <Box
@@ -34,7 +32,10 @@ export default function Tile({title, icon, path}) {
           }}
         >
           <Typography
-            sx={{fontSize: 16, textAlign: 'left', fontWeight: 700,
+            sx={{
+              fontSize: 16,
+              textAlign: 'left',
+              fontWeight: 600,
               display: 'inline'}}
             color="#1e85c1"
           >

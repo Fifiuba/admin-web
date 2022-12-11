@@ -15,6 +15,14 @@ import JourneysAdministration from './views/journeysAdministration.js';
 import Transactions from './views/transactions.js';
 import Services from './views/services.js';
 
+import {ThemeProvider, createTheme} from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    'fontFamily': 'Roboto',
+  },
+});
+
 export const AdminContext = React.createContext();
 
 function App() {
@@ -43,32 +51,34 @@ function App() {
   return (
 
     <BrowserRouter>
-      <AdminContext.Provider value={[admin, setAdmin]}>
-        <NavBar handleLogout={handleLogout}/>
-        <Routes>
-          <Route
-            index
-            element={<SignIn handleLogin={handleLogin}
-              signUpError={signUpError}/>}/>
-          <Route path="ingresar"
-            element={<SignIn
-              handleLogin={handleLogin}
-              signUpError={signUpError}/>}
-          />
-          <Route element={<ProtectedRoute/>}>
-            <Route path="registrar" element={<SignUp/>} />
-            <Route path="inicio" element={<Home/>} />
-            <Route path="perfil" element={<Profile/>} />
-            <Route path="usuarios" element={<UsersAdministration/>} />
-            <Route path="choferes" element={<DriversAdministration/>} />
-            <Route path="admins" element={<AdminsAdministration/>} />
-            <Route path="viajes" element={<JourneysAdministration/>} />
-            <Route path="metricas" element={<Metrics/>} />
-            <Route path="transacciones" element={<Transactions/>} />
-            <Route path="servicios" element={<Services/>} />
-          </Route>
-        </Routes>
-      </AdminContext.Provider>
+      <ThemeProvider theme={theme}>
+        <AdminContext.Provider value={[admin, setAdmin]}>
+          <NavBar handleLogout={handleLogout}/>
+          <Routes>
+            <Route
+              index
+              element={<SignIn handleLogin={handleLogin}
+                signUpError={signUpError}/>}/>
+            <Route path="ingresar"
+              element={<SignIn
+                handleLogin={handleLogin}
+                signUpError={signUpError}/>}
+            />
+            <Route element={<ProtectedRoute/>}>
+              <Route path="registrar" element={<SignUp/>} />
+              <Route path="inicio" element={<Home/>} />
+              <Route path="perfil" element={<Profile/>} />
+              <Route path="usuarios" element={<UsersAdministration/>} />
+              <Route path="choferes" element={<DriversAdministration/>} />
+              <Route path="admins" element={<AdminsAdministration/>} />
+              <Route path="viajes" element={<JourneysAdministration/>} />
+              <Route path="metricas" element={<Metrics/>} />
+              <Route path="transacciones" element={<Transactions/>} />
+              <Route path="servicios" element={<Services/>} />
+            </Route>
+          </Routes>
+        </AdminContext.Provider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

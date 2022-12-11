@@ -63,9 +63,12 @@ export default function UsersAdministration() {
   };
 
   const columns = [
-    {field: 'id', headerName: 'ID', flex: 1},
-    {field: 'name', headerName: 'Nombre', flex: 1},
-    {field: 'email', headerName: 'Correo electrónico', flex: 1},
+    {field: 'id', headerName: 'ID', flex: 0.2},
+    {field: 'name', headerName: 'Nombre', flex: 0.3},
+    {field: 'email', headerName: 'Correo electrónico',
+      headerAlign: 'center',
+      flex: 1,
+      align: 'center'},
     {field: 'phone_number', headerName: 'Teléfono'},
     {field: 'age', headerName: 'Edad'},
     {
@@ -74,9 +77,11 @@ export default function UsersAdministration() {
       flex: 1,
       sortable: false,
       disableColumnMenu: true,
+      align: 'center',
       renderCell: (params) => {
+        console.log(params);
         return (
-          <Box sx={{display: 'flex'}}>
+          <Box sx={{display: 'flex', textAlign: 'center'}}>
             <UserProfile
               user={params.row}
               role='passenger'
