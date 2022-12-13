@@ -54,8 +54,10 @@ export default function Services() {
           rows.push({
             id: id,
             name: key,
-            description: value.description,
-            createdOn: value.created_on.replaceAll('-', '/'),
+            description: value.status ? 'No disponible' : value.description,
+            createdOn:
+              value.status ?
+                'No disponible' : value.created_on.replaceAll('-', '/'),
             status: value.status,
           });
           id = id + 1;
