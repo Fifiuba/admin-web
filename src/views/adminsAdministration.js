@@ -49,7 +49,7 @@ export default function AdminsAdministration() {
           variant="h4"
           component="div"
         >
-        Conductores
+        Administradores
         </Typography>
         <DataGrid
           rows={admins}
